@@ -147,7 +147,7 @@ module.exports = (app, passport, db) => {
         password: hash,
         type: data.usertype,
         name: data.name,
-        phoneNumber: data.phone
+        phoneNumber: data.phoneNumber
       });
       user.save(err => {
         if (err) {
@@ -185,39 +185,42 @@ module.exports = (app, passport, db) => {
       });
   });
 
-  app.post('/job/:id/claim', (req, res) => {
-    if (!req.user) {
-      res.redirect('/login');
-      return;
-    }
-
-    // Get the job
-    if (req.user.type == 'Seeker') {
-      db.model.Job.update({ _id: req.params.id }, {
-        $push: { claimedBy: req.user._id }
-      });
-    } else {
-      res.send('Only seekers can claim jobs!');
-    }
-
-  });
-
-
-  app.post('/job/:id/claim', (req, res) => {
+  app.post('/job/claim', (req, res) => {
       if (req.user == undefined){
         res.redirect('/login');
       } else if (req.user.type == "Requester") {
         res.redirect('/login');
       } else {
-        var id = req.params.id;
+        var id = req.body.id;
         console.log("Accepting job id " + id + " by user " + req.user);
         db.model.Job.update({ _id: id }, { $push: { claimedBy: req.user._id } }, function (err, affected) {
            if (err) {
                console.log("Error accepting job: " + err);
            } else {
-               res.redirect('/yourjobs');
+               res.redirect('/myjobs');
            }
         });
+    }
+  });
+
+  app.get('/myjobs', (req, res) => {
+    if (req.user == undefined) {
+      res.redirect('/login');
+    } else if (req.user.type == "Requester") {
+      // Get jobs created by user
+
+      res.render('')
+    } else if (req.user.type == "Seeker") {
+      // Get jobs assigned to user
+      db.model.Job.find({
+        claimedBy: req.user._id
+      }, (err, jobs) => {
+
+      });
+
+      db.model.Job.populate('claimedBy').exec((err, users) => {});
+
+      res.render('claimed_jobs', )
     }
   });
 
