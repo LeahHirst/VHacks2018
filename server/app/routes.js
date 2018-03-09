@@ -138,7 +138,8 @@ module.exports = (app, passport, db) => {
         password: hash,
         type: data.usertype,
         name: data.name,
-        phoneNumber: data.phoneNumber
+        phoneNumber: data.phoneNumber,
+        photo: data.image
       });
       user.save(err => {
         if (err) {
@@ -164,7 +165,7 @@ module.exports = (app, passport, db) => {
             contactInfo: req.body.contactInfo,
             payment: req.body.payment,
             author: req.user,
-            image: req.image
+            image: req.body.image
         });
         job.save(
             function (error) {

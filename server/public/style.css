@@ -128,16 +128,20 @@ body,html{
 #wrapper-hero::before {
   content: "";
   width: 100%;
-  height: 200px;
+  height: 270px;
   position: absolute;
-  top: 125px;
+  top: 0;
   left: 0;
   z-index: -100;
   background-image: url('/img/roma.jpg');
-  background-position: 0 -200px;
+  background-position: 0 -180px;
   background-size: cover;
   overflow: hidden;
   opacity: 0.5;
+}
+
+#location-text:focus {
+  outline: none;
 }
 
 #main-header{
@@ -979,4 +983,24 @@ body,html{
 
 @media only screen and (max-width: 320px) {
 
+}
+
+#user-account{
+    display: flex;
+    position: absolute;
+    right: 0;
+    margin-top: 15px;
+    color: white;
+    font-size: 2em;
+}
+
+#account-a-tag{
+    color: white;
+    text-decoration: inherit;
+}
+
+
+
+.bottom-padding{
+    padding-bottom: 100px;
 }
