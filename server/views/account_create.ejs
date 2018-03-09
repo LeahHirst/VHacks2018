@@ -53,6 +53,21 @@
               <option value="Seeker">Seeker</option>
           </select>
         </div>
+        <img id="uploaded-image">
+        <input type="hidden" name="image" id="encodedImage" />
+        <script>
+            var loadFile = function(event) {
+                var output = document.getElementById('uploaded-image');
+                output.src = URL.createObjectURL(event.target.files[0]);
+                test = event.target.files[0];
+                var reader = new FileReader();
+                reader.addEventListener("load", function () {
+                    $('#encodedImage').val(reader.result);
+                }, false);
+                reader.readAsDataURL(event.target.files[0]);
+            };
+        </script>
+        <input class="input2" type="file" name="imagestuff" onchange="loadFile(event)">
         <button class="ui fluid large teal submit button">Register</button>
       </div>
       <% if (error) { %>

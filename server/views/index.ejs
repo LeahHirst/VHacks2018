@@ -14,6 +14,7 @@
 	<link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
 	<link href='/style.css' rel='stylesheet' type='text/css'>
     <script src="/js/sort.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyANNoWpcaXbtXtxCOs5g0RSQfZpRqygsfw&libraries=places"></script>
 
 
 </head>
@@ -37,17 +38,27 @@
 
 
         <div id="main_tip_search">
+
 			<form>
 				<input type="text" name="search" id="tip_search_input" list="search" autocomplete=off required>
 			</form>
 		</div>
-
         <div id="stripes"></div>
-        <a href="add-job.html"><button id="new-job" class="button">Add a job</button></a>
+        <a href="/job/create"><button id="new-job" class="button">Add a job</button></a>
+        <a href="reward"><button style="width:140px; margin-right:10px" class="button" >Job reward</button></a>
     </div>
+
 </div>
 
 <!-- NAVBAR -->
+
+<div id="wrapper-hero">
+    <section class="work" style="width: 100%;max-width: 600px">
+      <figure class="white" style="max-width: 600px; width: 100%; margin: auto 0;">
+        <input id="location-text" type="text" placeholder="Rome, Metropolitan City of Rome, Italy" style="width: 100%; max-width: 560px; border: none; font-size: 20px; padding: 20px;" />
+      </figure>
+    </section>
+</div>
 
 <div id="wrapper-navbar">
 		<div class="navbar object">
@@ -68,12 +79,10 @@
     		</div>
             </div>
             <div id="wrapper-bouton-icon">
-            	<div id="bouton-ai"><img src="/img/icon-ai.svg" alt="illustrator" title="Illustrator" height="28" width="28"></div>
-            	<div id="bouton-psd"><img src="/img/icon-psd.svg" alt="photoshop" title="Photoshop" height="28" width="28"></div>
-            	<div id="bouton-theme"><img src="/img/icon-themes.svg" alt="theme" title="Theme" height="28" width="28"></div>
-            	<div id="bouton-font"><img src="/img/icon-font.svg" alt="font" title="Font" height="28" width="28"></div>
-            	<div id="bouton-photo"><img src="/img/icon-photo.svg" alt="photo" title="Photo" height="28" width="28"></div>
-            	<div id="bouton-premium"><img src="/img/icon-premium.svg" alt="premium" title="Premium" height="28" width="28"></div>
+              <div class="slidecontainer">
+                <input type="range" style="float: right; margin-top: 23px;" min="1" max="50" value="20" class="slider" id="radius">
+                <div class="relevance object active" style="float:right;text-transform:none;"><span id="radius-label">20</span>km</div>
+              </div>
 			</div>
     	</div>
     </div>
@@ -81,50 +90,48 @@
 <!-- FILTER -->
 
 	<div id="main-container-menu" class="object">
-    	<div class="container-menu">
+    <div class="container-menu">
 
-            <div id="main-cross">
-            	<div id="cross-menu"></div>
-            </div>
+      <div id="main-cross">
+        <div id="cross-menu"></div>
+      </div>
 
-            <div id="main-small-logo">
-            	<div class="small-logo"></div>
-            </div>
+      <div id="main-small-logo">
+        <div class="small-logo"></div>
+      </div>
 
-            <div id="main-premium-ressource">
-                <div class="premium-ressource"><a href="#">Premium resources</a></div>
-            </div>
+      <div id="main-premium-ressource">
+        <div class="premium-ressource"><a href="#">Premium resources</a></div>
+      </div>
 
-            <div id="main-themes">
-                <div class="themes"><a href="#">Latest themes</a></div>
-            </div>
+      <div id="main-themes">
+        <div class="themes"><a href="#">Latest themes</a></div>
+      </div>
 
-            <div id="main-psd">
-                <div class="psd"><a href="#">PSD goodies</a></div>
-            </div>
+      <div id="main-psd">
+        <div class="psd"><a href="#">PSD goodies</a></div>
+      </div>
 
-            <div id="main-ai">
-                <div class="ai"><a href="#">Illustrator freebies</a></div>
-            </div>
+      <div id="main-ai">
+        <div class="ai"><a href="#">Illustrator freebies</a></div>
+      </div>
 
-            <div id="main-font">
-                <div class="font"><a href="#">Free fonts</a></div>
-            </div>
+      <div id="main-font">
+        <div class="font"><a href="#">Free fonts</a></div>
+      </div>
 
-            <div id="main-photo">
-                <div class="photo"><a href="#">Free stock photos</a></div>
-            </div>
-
+      <div id="main-photo">
+        <div class="photo"><a href="#">Free stock photos</a></div>
+      </div>
         </div>
     </div>
 
 
 <!-- PORTFOLIO -->
 
+
 	<div id="wrapper-container">
-
-		<div class="container object">
-
+    <div class="container object">
 			<div id="main-container-image">
 
 					<section class="work" id="job-container">
@@ -271,10 +278,13 @@ function timeSince(date) {
 var sType = SortType.relevance; // Current sort type
 var jobs = [];
 var largestRadius = 0;
+var latitude = 0;
+var longitude = 0;
 
 function template(job) {
   if (job.image == undefined) job.image = 'img/psd-4.jpg';
   var tSince = timeSince(new Date(job.created));
+  if (job.distance != undefined) tSince += ", " + job.distance + 'km away';
   return `<figure class="white">
       <a href="/job/${job._id}">
           <img class="job-image" src="${job.image}" alt="" />
@@ -286,7 +296,7 @@ function template(job) {
       <div id="wrapper-part-info">
           <div class="part-info-image"><img src="/img/new/profile-images/2.jpg" alt=""/></div>
           <div id="part-info">${job.title}
-              <div class="right-data"> <h3>&euro;${job.payment}</h3> <h4>${tSince}, ${job.distance}km away</h4></div>
+              <div class="right-data"> <h3>&euro;${job.payment}</h3> <h4>${tSince}</h4></div>
           </div>
       </div>
   </figure>`;
@@ -328,6 +338,24 @@ function sortJobs(sortType) {
 
 // Load default
 getJobs(10000000000);
+
+$('#radius').change(function() {
+  var val = $(this).val();
+  if (val > largestRadius) {
+    largestRadius = val;
+    getJobs(val);
+  }
+
+  $('#radius-label').text(Math.floor(val));
+});
+
+$('input[type=range]').on('input', function () {
+    $(this).trigger('change');
+});
+
+
+var input = document.getElementById('location-text');
+autocomplete = new google.maps.places.Autocomplete(input);
 
 </script>
 
