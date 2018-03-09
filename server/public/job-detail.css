@@ -63,7 +63,7 @@
 	margin-left: 15px;
 	line-height: 20px;
 	font-family: Helvetica, sans-serif; 
-		font-weight: 300; 
+	font-weight: 300; 
 }
 
 .details-icon{
@@ -81,9 +81,17 @@
 .font-style{
 	font-family: Helvetica, sans-serif; 
 	-webkit-font-smoothing: antialiased;
-		-moz-osx-font-smoothing: grayscale;
-		font-weight: 500; 
-		color:#666;
+	-moz-osx-font-smoothing: grayscale;
+	font-weight: 500; 
+	color:#666;
+}
+
+.font-style-white{
+	font-family: Helvetica, sans-serif; 
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-weight: 500; 
+	color:white;
 }
 
 #job-name-row{
