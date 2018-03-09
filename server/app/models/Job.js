@@ -16,8 +16,14 @@ module.exports = new Schema({
 		required: true
 	},
 	location: {
-		type: String,
-		required: true
+		latitude: {
+			type: Number,
+			required: true
+		},
+		longitude: {
+			type: Number,
+			required: true
+		}
 	},
 	number_required: {
 		type: Number,
