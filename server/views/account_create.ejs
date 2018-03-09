@@ -46,10 +46,13 @@
             <input type="text" name="phoneNumber" placeholder="(555)-132-2121">
           </div>
         </div>
-        <select name="usertype" id="usertype">
-          <option>Requester</option>
-          <option>Seeker</option>
-        </select>
+        <div class="field">
+          <select class="ui fluid dropdown">
+            <option value="">Type</option>
+              <option value="Requester">Requester</option>
+              <option value="Seeker">Seeker</option>
+          </select>
+        </div>
         <button class="ui fluid large teal submit button">Register</button>
       </div>
       <% if (error) { %>
