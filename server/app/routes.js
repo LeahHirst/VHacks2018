@@ -138,7 +138,8 @@ module.exports = (app, passport, db) => {
         password: hash,
         type: data.usertype,
         name: data.name,
-        phoneNumber: data.phoneNumber
+        phoneNumber: data.phoneNumber,
+        photo: data.image
       });
       user.save(err => {
         if (err) {
