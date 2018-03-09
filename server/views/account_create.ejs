@@ -3,29 +3,82 @@
   <head>
     <meta charset="utf-8">
     <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="/semantic/dist/semantic.min.css">
+    <script
+      src="https://code.jquery.com/jquery-3.1.1.min.js"
+      integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+      crossorigin="anonymous"></script>
+    <script src="/semantic/dist/semantic.min.js"></script>
   </head>
   <body>
-    Login
 
-    <% if (error) { %>
-    <h2><%= error %></h2>
-    <% } %>
-    <form action="/account/create" method="POST">
-      <label for="name">Full name: </label>
-      <input type="text" name="name" id="name" />
-      <label for="email">Email: </label>
-      <input type="email" name="email" id="email" />
-      <label for="phone">Phone number: </label>
-      <input type="text" name="phone" id="phone" />
-      <label for="password">Password: </label>
-      <input type="password" name="password" id="password" />
-      <label for="usertype">User type: </label>
-      <select name="usertype" id="usertype">
-        <option>Requester</option>
-        <option>Actioner</option>
-      </select>
-
-      <button>Submit</button>
+  <div class="ui middle aligned center aligned grid">
+  <div class="column">
+    <h2 class="ui teal image header">
+      <img src="img/small-logo.svg" class="image">
+      <div class="content">
+        Register for an account
+      </div>
+    </h2>
+    <form class="ui large form" action="/account/create" method="POST">
+      <div class="ui stacked segment">
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="user icon"></i>
+            <input type="text" name="name" placeholder="Full Name">
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="lock icon"></i>
+            <input type="password" name="password" placeholder="Password">
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="mail icon"></i>
+            <input type="text" name="email" placeholder="E-mail address">
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="phone icon"></i>
+            <input type="text" name="phoneNumber" placeholder="(555)-132-2121">
+          </div>
+        </div>
+        <div class="field">
+          <select name="usertype" class="ui fluid dropdown">
+            <option value="">Type</option>
+              <option value="Requester">Requester</option>
+              <option value="Seeker">Seeker</option>
+          </select>
+        </div>
+        <button class="ui fluid large teal submit button">Register</button>
+      </div>
+      <% if (error) { %>
+      <div class = "ui error message"><%= error %></div>
+      <% } %>
     </form>
+
+    <div class="ui message">
+      Already have an account? <a href="/login">Log In</a>
+    </div>
+  </div>
+</div>
   </body>
+
+    <style type="text/css">
+    body {
+      background-color: #DADADA;
+    }
+    body > .grid {
+      height: 100%;
+    }
+    .image {
+      margin-top: -100px;
+    }
+    .column {
+      max-width: 450px;
+    }
+  </style>
 </html>
