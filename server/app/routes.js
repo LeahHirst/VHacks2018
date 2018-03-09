@@ -9,6 +9,11 @@ module.exports = (app, passport, db) => {
     res.render('login', { loginError: req.flash('error') });
   });
 
+  app.get('/logout', (req, res) => {
+      req.logout();
+      res.redirect('/login');
+  });
+
   app.get('/createjob', (req, res) => {
     res.render('createjob', { error: req.flash("error") });
   });
@@ -131,6 +136,7 @@ module.exports = (app, passport, db) => {
       });
       user.save(err => {
         if (err) {
+            console.log(err);
           req.flash('error', err);
           res.redirect('/account/create');
           return;
