@@ -208,19 +208,28 @@ module.exports = (app, passport, db) => {
       res.redirect('/login');
     } else if (req.user.type == "Requester") {
       // Get jobs created by user
-
-      res.render('')
+      db.model.Job.find({
+        author: req.user._id
+      }, (err, jobs) => {
+        if (err) {
+          console.log(err);
+          res.send('Error');
+        } else {
+          res.render('created_jobs', { jobs: jobs });
+        }
+      });
     } else if (req.user.type == "Seeker") {
       // Get jobs assigned to user
       db.model.Job.find({
         claimedBy: req.user._id
       }, (err, jobs) => {
-
+        if (err) {
+          console.log(err);
+          res.send('Error');
+        } else {
+          res.render('claimed_jobs', { jobs: jobs });
+        }
       });
-
-      db.model.Job.populate('claimedBy').exec((err, users) => {});
-
-      res.render('claimed_jobs', )
     }
   });
 
