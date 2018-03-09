@@ -48,7 +48,7 @@
 
                 </div>
 
-
+                <a href="profile.html"><img id="profpic" src="img/new/profile-images/5.jpg"></a>
                 <div id="main_tip_search"> 
                     <form>
                         <input type="text" name="search" id="tip_search_input" list="search" autocomplete=off required>
@@ -342,37 +342,7 @@
             });
 
 
-            /* BOUTON PREV */
-
-            $(document).on('touchstart mouseover', '#logo', function(event){
-
-                event.stopPropagation();
-                event.preventDefault();
-                if(event.handled !== true) {
-
-                    $("#logo").stop().animate({scale:'1.1',opacity:'0.5'},300);	
-
-                    event.handled = true;
-                } else {
-                    return false;
-                }
-            });
-
-            $(document).on('touchend mouseout', '#logo', function(event){
-
-                event.stopPropagation();
-                event.preventDefault();
-                if(event.handled !== true) {
-
-                    $("#logo").stop().animate({scale:'1',opacity:'1'},300);	
-
-                    event.handled = true;
-                } else {
-                    return false;
-                }
-            });
-
-
+           
 
             /*FORMULAIRE NEWSLETTER*/
 
