@@ -32,7 +32,7 @@
 }
 </style>
 
-<form action="/charge" method="post" id="payment-form">
+<form action="/account/charge" method="post" id="payment-form">
   <div class="form-row">
     <label for="card-element">
       Credit or debit card
@@ -44,6 +44,9 @@
     <!-- Used to display form errors. -->
     <div id="card-errors" role="alert"></div>
   </div>
+
+  <label for="amount">Charge Amount: </label>
+  <input type="amount" name="amount" id="amount" />
 
   <button>Submit Payment</button>
 </form>
