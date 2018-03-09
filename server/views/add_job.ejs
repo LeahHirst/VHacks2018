@@ -1,0 +1,597 @@
+<!DOCTYPE HTML>
+<html>
+
+    <head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Add a Job</title>
+
+        <!-- Behavioral Meta Data -->
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <link rel="icon" type="image/png" href="/img/small-logo-01.png">
+        <link href='http://fonts.googleapis.com/css?family=Roboto:400,900,900italic,700italic,700,500italic,400italic,500,300italic,300' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+        <link href='/add-job.css' rel='stylesheet' type='text/css'>
+
+
+        <!--    links for form styling-->
+        <link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+        <link rel="stylesheet" type="text/css" href="/vendor/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="/vendor/animate/animate.css">
+        <link rel="stylesheet" type="text/css" href="/vendor/css-hamburgers/hamburgers.min.css">
+        <link rel="stylesheet" type="text/css" href="/vendor/select2/select2.min.css">
+        <link rel="stylesheet" type="text/css" href="/css-form/util.css">
+        <link rel="stylesheet" type="text/css" href="/css-form/main.css">
+
+        <!--     google api key -->
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyANNoWpcaXbtXtxCOs5g0RSQfZpRqygsfw&libraries=places"></script>
+
+
+    </head>
+
+    <body>
+
+        <a name="ancre"></a>
+
+        <!-- CACHE -->
+        <div class="cache"></div>
+
+        <!-- HEADER -->
+
+        <div id="wrapper-header">
+            <div id="main-header" class="object">
+                <div class="logo">
+                    Co.unity - <span id="title-description">helping your community help you</span>
+                    <!--            <img src="img/new/logo.svg" alt="logo platz" style="height: 20%;">-->
+
+                </div>
+
+                <a href="profile.html"><img id="profpic" src="img/new/profile-images/5.jpg"></a>
+                <div id="main_tip_search"> 
+                    <form>
+                        <input type="text" name="search" id="tip_search_input" list="search" autocomplete=off required>
+                    </form>
+                </div>
+
+                <div id="stripes"></div>
+                <a href="add-job.html"><button id="new-job" class="button">Add a job</button></a>
+            </div>
+        </div>
+
+        <!-- PORTFOLIO -->
+
+        <div id="wrapper-container">
+
+
+
+            <div id="main-container-image">
+
+                <div class="bg-contact2">
+                    <div class="container-contact2">
+                        <div class="wrap-contact2">
+                            <form class="contact2-form validate-form" action="/job/create" method="POST">
+                                <span class="contact2-form-title">
+                                    Job Details 	&#8594;
+                                </span>
+
+                                <div class="wrap-input2 validate-input" data-validate="Job name is required">
+                                    <input class="input2" type="text" name="title">
+                                    <span class="focus-input2" data-placeholder="JOB NAME"></span>
+                                </div>
+
+                                <div class="wrap-input2 validate-input" data-validate="Job description is required">
+                                    <input class="input2" type="text" name="description">
+                                    <span class="focus-input2" data-placeholder="DESCRIPTION"></span>
+                                </div>
+
+                                <div class="wrap-input2 validate-input" data-validate="Number of people is required">
+                                    <span data-placeholder="Number of people needed"></span>
+                                    <input class="input2" type="text" name="numberRequired">
+                                    <span class="focus-input2" data-placeholder="NO. PEOPLE NEEDED"></span>
+
+                                </div>
+
+
+                                <div class="wrap-input2 validate-input" data-validate="Job location is required">
+                                    <input class="input2" id="location" type="text" name="job-location" placeholder="">
+                                    <span class="focus-input2" data-placeholder="LOCATION"></span>
+                                </div>
+
+                                <input type="hidden" name="latitude" id="latitude" />
+                                <input type="hidden" name="longitude" id="longitude" />
+
+                                <script>
+
+                                    function initializeAuto() {
+                                        var input = document.getElementById('location');
+                                        autocomplete = new google.maps.places.Autocomplete(input);
+                                        google.maps.event.addListener(autocomplete, 'place_changed', function () {
+                                            var place = autocomplete.getPlace();
+                                            $("#latitude").val(place.geometry.location.lat());
+                                            $("#longitude").val(place.geometry.location.lng());
+                                            // alert(place.address_components[0].long_name);
+
+                                        });
+                                    }
+
+                                    google.maps.event.addDomListener(window, 'load', initializeAuto);
+
+                                </script>
+
+
+
+                                <div class="wrap-input2 validate-input" data-validate="Deadline is required">
+                                    <span data-placeholder="JOB DEADLINE"></span>
+                                    <input class="input2" type="date" name="deadline">
+                                    <span class="focus-input2" data-placeholder="JOB DEADLINE"></span>
+
+                                </div>
+                                <p>&nbsp;</p>
+
+                                <span class="contact2-form-title">
+                                    Job Image 	&#8594;
+                                </span>
+
+                                <img id="uploaded-image">
+
+                                <input type="hidden" name="image" id="encodedImage" />
+                                <script>
+                                    var loadFile = function(event) {
+                                        var output = document.getElementById('uploaded-image');
+                                        output.src = URL.createObjectURL(event.target.files[0]);
+                                        test = event.target.files[0];
+                                        var reader = new FileReader();
+                                        reader.addEventListener("load", function () {
+                                            $('#encodedImage').val(reader.result);
+                                        }, false);
+                                        reader.readAsDataURL(event.target.files[0]);
+                                    };
+                                </script>
+
+
+                                <input class="input2" type="file" name="job-email" onchange="loadFile(event)">
+
+
+
+
+                                <p>&nbsp;</p>
+                                <span class="contact2-form-title">
+                                    Your Details 	&#8594;
+                                </span>
+
+
+
+                                <div class="wrap-input2 validate-input" data-validate="Email address is required">
+                                    <input class="input2" type="text" name="contactInfo">
+                                    <span class="focus-input2" data-placeholder="CONTACT EMAIL"></span>
+                                </div>
+
+                                <div class="wrap-input2 validate-input" data-validate="Credit card is required">
+                                    <input class="input2" type="text" name="payment">
+                                    <span class="focus-input2" data-placeholder="CREDIT CARD NUMBER"></span>
+                                </div>
+
+
+
+                                <div class="container-contact2-form-btn">
+                                    <div class="wrap-contact2-form-btn">
+                                        <div class="contact2-form-bgbtn"></div>
+                                        <button class="contact2-form-btn">
+                                            Add Your Job
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+                <!--
+<div id="main-container-image">
+
+<div class="title-item">
+<div class="title-icon"></div>
+<div class="title-text">Ipad Pro Mockup </div>
+<div class="title-text-2">Sept 25, 2015 by Onuur</div>
+</div>
+
+
+<div class="work">
+<figure class="white">
+<img src="img/psd-4.jpg" alt="" />
+<div id="wrapper-part-info">
+<div class="part-info-image-single">
+<img src="img/mockup-1.jpg" alt="" width="628" height="437"/>
+<img src="img/mockup-2.jpg" alt="" width="628" height="437"/>
+<img src="img/mockup-3.jpg" alt="" width="628" height="437"/>
+</div>
+</div>
+</figure>	
+
+<div class="wrapper-text-description">
+
+<div class="wrapper-view">
+<div class="icon-view"><img src="img/icon-eye.svg" alt="" width="24" height="16"/></div>
+<div class="text-view">2,451 views</div>
+</div>
+
+<div class="wrapper-file">
+<div class="icon-file"><img src="img/icon-psdfile.svg" alt="" width="21" height="21"/></div>
+<div class="text-file">Photoshop</div>
+</div>
+
+<div class="wrapper-weight">
+<div class="icon-weight"><img src="img/icon-weight.svg" alt="" width="20" height="23"/></div>
+<div class="text-weight">23 Mo</div>
+</div>
+
+<div class="wrapper-desc">
+<div class="icon-desc"><img src="img/icon-desc.svg" alt="" width="24" height="24"/></div>
+<div class="text-desc">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. </div>
+</div>
+
+<div class="wrapper-download">
+<div class="icon-download"><img src="img/icon-download.svg" alt="" width="19" height="26"/></div>
+<div class="text-download"><a href="#"><b>Download</b></a></div>
+</div>
+
+<div class="wrapper-morefrom">
+<div class="text-morefrom">More from .psd</div>
+<div class="image-morefrom">
+<a href="#"><div class="image-morefrom-1"><img src="img/psd-1.jpg" alt="" width="430" height="330"/></div></a>
+<a href="#"><div class="image-morefrom-2"><img src="img/psd-2.jpg" alt="" width="430" height="330"/></div></a>
+<a href="#"><div class="image-morefrom-3"><img src="img/psd-3.jpg" alt="" width="430" height="330"/></div></a>
+<a href="#"><div class="image-morefrom-4"><img src="img/psd-6.jpg" alt="" width="430" height="330"/></div></a>
+</div>
+</div>
+
+</div>
+
+<div class="post-reply">
+<div class="image-reply-post"></div>
+<div class="name-reply-post">Igor vlademir</div>
+<div class="text-reply-post">Awesome mockup, i like it very much ! It will help me for my website i was looking for since few days. Thank you a lot.</div>
+</div>
+
+<div class="post-reply-2">
+<div class="image-reply-post-2"></div>
+<div class="name-reply-post-2">Nathan Shaw</div>
+<div class="text-reply-post-2">Well done ! I like the way you did it. Awesome ! </div>
+</div>
+
+<div class="post-send">
+<div id="main-post-send"> 
+<div id="title-post-send">Add your comment</div>
+<form id="contact" method="post" action="/onclickprod/formsubmit_op.asp">
+<fieldset>
+<p><textarea id="message" name="message" maxlength="500" placeholder="Votre Message" tabindex="5" cols="30" rows="4"></textarea></p>
+</fieldset>
+<div style="text-align:center;"><input type="submit" name="envoi" value="Envoyer" /></div>
+</form>
+</div>
+</div>
+</div>
+</div>	
+-->
+            </div>
+
+            <div id="main-container-footer">
+                <div class="container-footer">
+
+                    <div id="row-1f">
+                        <div class="text-row-1f"><span style="font-weight:600;font-size:15px;color:#666;line-height:250%;text-transform:uppercase;letter-spacing:1.5px;">What we do</span><br>We aim to foster social inclusion within our local communities by providing temporary jobs to those who need them.</div>
+                    </div>
+
+                    <div id="row-2f">
+                        <div class="text-row-2f"><span style="font-weight:600;font-size:15px;color:#666;line-height:250%;text-transform:uppercase;letter-spacing:1.5px;">See a job you like?</span><br>Claim it and complete it, and you'll get a gift card for your the great work you did!</div>
+                    </div>
+
+                    <div id="row-3f">
+                        <div class="text-row-3f"><span style="font-weight:600;font-size:15px;color:#666;line-height:250%;text-transform:uppercase;letter-spacing:1.5px;">Need a job done?</span><br>Create a job and someone in your community will be at your aid!</div>
+                    </div>
+
+                    <div id="row-4f">
+                        <div class="text-row-4f"><span style="font-weight:600;font-size:15px;color:#666;line-height:250%;text-transform:uppercase;letter-spacing:1.5px;">Newsletter</span><br>You will be informed monthly about the latest content avalaible.</div>
+
+                        <div id="main_tip_newsletter">
+                            <form>
+                                <input type="text" name="newsletter" id="tip_newsletter_input" list="newsletter" autocomplete=off required>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+
+
+        <!-- SCRIPT -->
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script type="text/javascript" src="/js/jquery.scrollTo.min.js"></script>
+        <script type="text/javascript" src="/js/jquery.localScroll.min.js"></script>
+        <script type="text/javascript" src="/js/jquery-animate-css-rotate-scale.js"></script>
+        <script type="text/javascript" src="/js/fastclick.min.js"></script>
+        <script type="text/javascript" src="/js/jquery.flip.min.js"></script>
+        <script type="text/javascript" src="/js/jquery.animate-colors-min.js"></script>
+        <script type="text/javascript" src="/js/jquery.animate-shadow-min.js"></script>    
+
+        <script>
+
+
+
+            $(document).ready(function() {
+                $.localScroll();
+                $(".cache").delay(1000).fadeOut(500);
+
+                $("#wrapper-header").delay(1500).animate({opacity:'1',width:'100%'},500);
+                $("#wrapper-navbar").delay(2000).animate({opacity:'1',height:'60px'},500);
+
+                $("#main-container-image").delay(2500).animate({opacity:'1'},500);
+
+            });
+
+            /*TRANSITION PAGE*/
+
+            var speed = 'slow';
+
+            $('html, body').hide();
+
+            $(document).ready(function() {
+                $('html, body').fadeIn(speed, function() {
+                    $('a[href], button[href]').click(function(event) {
+                        var url = $(this).attr('href');
+                        if (url.indexOf('#') == 0 || url.indexOf('javascript:') == 0) return;
+                        event.preventDefault();
+                        $('html, body').fadeOut(speed, function() {
+                            window.location = url;
+                        });
+                    });
+                });
+            });
+
+            /* DISABLE HOVER EFFECT WHILE YOU SCROLL FOR A SMOOTHY NAVIGATION */
+
+            var body = document.body,
+                timer;
+
+            window.addEventListener('scroll', function() {
+
+                clearTimeout(timer);
+
+                if(!body.classList.contains('disable-hover'))
+                    body.classList.add('disable-hover')
+
+                    timer = setTimeout(function(){
+                        body.classList.remove('disable-hover')
+                    }, 200);
+
+            }, false);
+
+            /* BOUTON MENU */
+
+            $(document).on('touchstart mouseover', '#stripes', function(event){
+
+                event.stopPropagation();
+                event.preventDefault();
+                if(event.handled !== true) {
+
+                    $("#stripes").stop().animate({scale:'1.2',opacity:'0.5'},300);	
+
+                    event.handled = true;
+                } else {
+                    return false;
+                }
+            });
+
+            $(document).on('touchend mouseout', '#stripes', function(event){
+
+                event.stopPropagation();
+                event.preventDefault();
+                if(event.handled !== true) {
+
+                    $("#stripes").stop().animate({scale:'1',opacity:'1'},300);	
+
+                    event.handled = true;
+                } else {
+                    return false;
+                }
+            });
+
+            /* MENU SIDE OPEN */
+
+            var MENUSIDEOPEN = document.getElementById('stripes');
+
+            MENUSIDEOPEN.addEventListener('click', function() {
+                $("#main-container-menu").stop().animate({left:'0'},300);	
+            }); 
+
+            /* BOUTON CROSS */
+
+            $(document).on('touchstart mouseover', '#cross-menu', function(event){
+
+                event.stopPropagation();
+                event.preventDefault();
+                if(event.handled !== true) {
+
+                    $("#cross-menu").stop().animate({scale:'1.2',opacity:'0.5'},300);	
+
+                    event.handled = true;
+                } else {
+                    return false;
+                }
+            });
+
+            $(document).on('touchend mouseout', '#cross-menu', function(event){
+
+                event.stopPropagation();
+                event.preventDefault();
+                if(event.handled !== true) {
+
+                    $("#cross-menu").stop().animate({scale:'1',opacity:'1'},300);	
+
+                    event.handled = true;
+                } else {
+                    return false;
+                }
+            });
+
+
+
+            /* BOUTON MENU */
+
+            $(document).on('touchstart mouseover', '#stripes', function(event){
+
+                event.stopPropagation();
+                event.preventDefault();
+                if(event.handled !== true) {
+
+                    $("#stripes").stop().animate({scale:'1.2',opacity:'0.5'},300);	
+
+                    event.handled = true;
+                } else {
+                    return false;
+                }
+            });
+
+            $(document).on('touchend mouseout', '#stripes', function(event){
+
+                event.stopPropagation();
+                event.preventDefault();
+                if(event.handled !== true) {
+
+                    $("#stripes").stop().animate({scale:'1',opacity:'1'},300);	
+
+                    event.handled = true;
+                } else {
+                    return false;
+                }
+            });
+
+            /* BOUTON NEXT */
+
+            $(document).on('touchstart mouseover', '#oldnew-next', function(event){
+
+                event.stopPropagation();
+                event.preventDefault();
+                if(event.handled !== true) {
+
+                    $("#oldnew-next").stop().animate({scale:'1.2',opacity:'0.5'},300);	
+
+                    event.handled = true;
+                } else {
+                    return false;
+                }
+            });
+
+            $(document).on('touchend mouseout', '#oldnew-next', function(event){
+
+                event.stopPropagation();
+                event.preventDefault();
+                if(event.handled !== true) {
+
+                    $("#oldnew-next").stop().animate({scale:'1',opacity:'1'},300);	
+
+                    event.handled = true;
+                } else {
+                    return false;
+                }
+            });
+
+            /* BOUTON PREV */
+
+            $(document).on('touchstart mouseover', '#oldnew-prev', function(event){
+
+                event.stopPropagation();
+                event.preventDefault();
+                if(event.handled !== true) {
+
+                    $("#oldnew-prev").stop().animate({scale:'1.2',opacity:'0.5'},300);	
+
+                    event.handled = true;
+                } else {
+                    return false;
+                }
+            });
+
+            $(document).on('touchend mouseout', '#oldnew-prev', function(event){
+
+                event.stopPropagation();
+                event.preventDefault();
+                if(event.handled !== true) {
+
+                    $("#oldnew-prev").stop().animate({scale:'1',opacity:'1'},300);	
+
+                    event.handled = true;
+                } else {
+                    return false;
+                }
+            });
+
+
+            /* BOUTON PREV */
+
+            $(document).on('touchstart mouseover', '#logo', function(event){
+
+                event.stopPropagation();
+                event.preventDefault();
+                if(event.handled !== true) {
+
+                    $("#logo").stop().animate({scale:'1.1',opacity:'0.5'},300);	
+
+                    event.handled = true;
+                } else {
+                    return false;
+                }
+            });
+
+            $(document).on('touchend mouseout', '#logo', function(event){
+
+                event.stopPropagation();
+                event.preventDefault();
+                if(event.handled !== true) {
+
+                    $("#logo").stop().animate({scale:'1',opacity:'1'},300);	
+
+                    event.handled = true;
+                } else {
+                    return false;
+                }
+            });
+
+
+
+            /*FORMULAIRE NEWSLETTER*/
+
+        </script>
+
+        <!-- for form -->
+
+        <!--    <script src="vendor/jquery/jquery-3.2.1.min.js"></script>-->
+        <script src="/vendor/bootstrap/js/popper.js"></script>
+        <script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+        <script src="/vendor/select2/select2.min.js"></script>
+        <script src="/js-form/main.js"></script>
+
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'UA-23581568-13');
+        </script>
+
+
+    </body>
+
+
+</html>
