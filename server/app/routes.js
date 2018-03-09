@@ -23,7 +23,7 @@ module.exports = (app, passport, db) => {
   });
 
   app.get('/job/create', (req, res) => {
-    res.render('createjob', { error: req.flash("error") });
+    res.render('add_job', { error: req.flash("error") });
   });
 
   app.get('/job/create/confirmation', (req, res) => {
@@ -36,7 +36,6 @@ module.exports = (app, passport, db) => {
           if (err) {
               console.log(err);
           } else {
-              console.log(jobs);
               res.send(jobs);
           }
         });
@@ -47,20 +46,6 @@ module.exports = (app, passport, db) => {
 		failureRedirect: '/login',
 		failureFlash: 'Invalid username or password.'
   }));
-
-  // Jobs
-  app.get('/jobs', (req, res) => {
-    var data = req.body;
-
-    // TODO: Support search radius
-    data.latitude = 0;
-    data.longitude = 0;
-    data.radius = 1000000; // km
-
-    jobs.getJobsFromLocality(data.latitude, data.longitude, data.radius, (err, jobs) => {
-        res.render('view_jobs', { jobs: jobs });
-      });
-  });
 
   app.get('/account', (req,res) => {
   	if (!req.user){
@@ -178,7 +163,8 @@ module.exports = (app, passport, db) => {
             numberRequired: req.body.numberRequired,
             contactInfo: req.body.contactInfo,
             payment: req.body.payment,
-            author: req.user
+            author: req.user,
+            image: req.image
         });
         job.save(
             function (error) {
