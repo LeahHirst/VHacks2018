@@ -16,6 +16,11 @@ module.exports = new require('mongoose').Schema({
 		type: String,
 		required: true
 	},
+	balance: {
+		type: Number,
+		default: 0.0
+		required: false
+	},
   phoneNumber: {
     type: String,
     required: true
