@@ -190,13 +190,13 @@ module.exports = (app, passport, db) => {
   });
 
 
-  app.post('/job/claim', (req, res) => {
+  app.post('/job/:id/claim', (req, res) => {
       if (req.user == undefined){
         res.redirect('/login');
       } else if (req.user.type == "Requester") {
         res.redirect('/login');
       } else {
-        var id = req.query.id;
+        var id = req.params.id;
         console.log("Accepting job id " + id + " by user " + req.user);
         db.model.Job.update({ _id: id }, { $push: { claimedBy: req.user._id } }, function (err, affected) {
            if (err) {
