@@ -6,6 +6,7 @@
 .username-style{
 	font-weight: 700;
 	margin-bottom: 5px;
+	margin-bottom: 5px;
 }
 
 .account-details{
@@ -28,9 +29,21 @@ p.min-margins{
 	color: white;
 }
 
+.job-due-reminder-container{
+	padding: 10px;
+	background-color: #FFCA28;
+	font-size: 14px;
+}
+
 .job-completion-container{
 	background-color: #8BC34A;
 	padding: 10px;
+}
+
+.job-completion-action-container{
+	background-color: #8BC34A;
+	padding: 20px;
+	text-align: center;
 }
 
 .job-pending-container{
@@ -44,6 +57,10 @@ p.min-margins{
 	-webkit-align-items: center;
 	-webkit-box-align: center;
 	align-items: center;
+}
+
+.right-align{
+	text-align: right;
 }
 
 .bold-text{
@@ -65,7 +82,7 @@ p.min-margins{
 }
 
 .larger-profile-image img{
-	margin-top: 12px;
+	margin-top: 8px;
 	width: 60px;
 	height: 60px;
 }
