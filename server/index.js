@@ -39,13 +39,13 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash())
 
+// Register db
+var db = require('./app/database.js')(mongoose);
+
 passport.use(new LocalStrategy({
   usernameField: "email",
 	passwordField: "password"
 }, require('./app/authenticate.js')(db)));
-
-// Register db
-var db = require('./app/database.js')(mongoose);
 
 // Static directory
 app.use(express.static('public'));

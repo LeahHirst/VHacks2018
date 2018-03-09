@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Login</title>
+  </head>
+  <body>
+    Login
+
+    <% if (loginError) { %>
+    <h2><%= loginError %></h2>
+    <% } %>
+    <form action="/login" method="POST">
+      <label for="email">Email: </label>
+      <input type="email" name="email" id="email" />
+      <label for="password">Password: </label>
+      <input type="password" name="password" id="password" />
+      <button>Submit</button>
+    </form>
+  </body>
+</html>
