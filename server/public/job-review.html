@@ -191,12 +191,46 @@
 									
 								</div>
 							</form>
-							<button onclick="fundJob()" class="btn right-margin font-style" type="button" id="fund-job-btn"><span>APPROVE WORK</span>
+							<button class="btn right-margin font-style" type="button" id="fund-job-btn"><span>APPROVE WORK</span>
 							</button>
+                            
+                         
+                            <script> 
+                                function resubmission() {
+                                    console.log(document.getElementById('resubmit-btn').style.visibility); 
+                        
+                                    document.getElementById('resubmit-form').style.visibility = "visible"; 
+                                }
+                                
+                                function submittedFeedback() {
+                                    document.getElementById('resubmit-form').style.visibility = "hidden"; 
+                                    document.getElementById('resubmit-btn').innerHTML = "&nbsp;&nbsp; THANK YOU &nbsp;&nbsp;&nbsp;"
+                                }
+
+                            </script>
+                        
 							
-							<button class="btn font-style" type="button"><span>REQUEST RESUBMISSION</span></button>
+							<button onclick="resubmission()" id="resubmit-btn" class="btn font-style" type="button"><span>REQUEST RESUBMISSION</span></button>
+                            
+                           
+                            
+                            
 						</div>
 					</div>
+                    
+                    <div id="resubmit-form" style="visibility: hidden;">
+                        <form>
+                            
+                            <p>Please provide feedback on how this work can be improved: </p>
+                            <textarea name="feedback" cols="60" rows="10" style="border-radius: 10px; border: none; "></textarea>
+                            
+                            <p>&nbsp;</p>
+                            
+                            <button onclick="submittedFeedback()" id="resubmit-btn" class="btn font-style" type="button"><span>SUBMIT FEEDBACK</span></button>
+                        </form>
+
+                    </div>
+                    
 				</div>
 			</div>
 		</div>
