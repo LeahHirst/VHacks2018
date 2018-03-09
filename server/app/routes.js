@@ -1,7 +1,7 @@
 module.exports = (app, passport, db) => {
 
   app.get('/', (req, res) => {
-    res.send('Hello world!');
+    res.render('index.html');
   });
 
   app.get('/login', (req, res) => {
