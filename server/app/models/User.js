@@ -9,12 +9,17 @@ module.exports = new require('mongoose').Schema({
 	},
 	type: {
 		type: String,
-		enum: ['Requester', 'Actioner'],
+		enum: ['Requester', 'Seeker'],
 		required: true
 	},
 	name: {
 		type: String,
 		required: true
+	},
+	balance: {
+		type: Number,
+		default: 0.0,
+		required: false
 	},
   phoneNumber: {
     type: String,
