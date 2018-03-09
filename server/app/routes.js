@@ -25,37 +25,69 @@ module.exports = (app, passport, db) => {
 
   // Jobs
   app.get('/jobs', (req, res) => {
+    var data = req.body;
+
+    // TODO: Support search radius
+    data.latitude = 0;
+    data.longitude = 0;
+    data.radius = 1000000; // km
+
+    var jobs = require('./jobs.js')(db)
+      .getJobsFromLocality(data.latitude, data.longitude, data.radius, (err, jobs) => {
+        res.render('view_jobs', { jobs: jobs });
+      });
+  });
+
+  app.get('/account', (req,res) => {
+  	if (!req.user){
+  		res.redirect('/login');
+  	}
+
+  	res.render('account', { user: req.user });
+  	// if (req.user.type == 'Requester'){
+  		
+  	// 	// render bio and past given jobs 
+  	// } else { // seeker 
+
+  	// 	// render seeker page with past completed jobs
+  	// }
 
   });
 
-
   app.get('/account/add_funds', (req,res) => {
+  	if (!req.user){
+  		res.redirect('/login');
+  	}
   	res.render('add_funds', { loginError: req.flash('error') });
   });
 
-  app.post('/account/add_funds/charge', (req,res) => {
+  app.post('/account/charge', (req,res) => {
   	  var stripe = require('stripe')('sk_test_yjY74aO0nY2faLr4CiV9kqNz'); // 4242 4242 4242 4242 test credit card
   	  const stripeToken = req.body.stripeToken;
-	  const productID = parseInt(req.body.productID);
-	  const productAmount = req.body.productAmount;
-	  const userID = parseInt(req.user.id);
-	  // validate product
-	  return routeHelpers.validateProduct(productID, productAmount)
-	  .then((product) => {
-	    // create charge
-	    const charge = {
-	      amount: productAmount * 100,
-	      currency: product.currency,
-	      card: stripeToken
-	    };
-	    routeHelpers.createCharge(charge, productID, userID);
+  	  var charge_amt = parseFloat(req.body.amount);
+		
+	  // create charge
+	  const charge = {
+	    amount: charge_amt * 100.0, // convert to cents! 
+	    currency: 'eur', 
+	    card: stripeToken
+	  };
+	  stripe.charges.create(charge, (err, res) => {
+	    if (err) {
+	    	console.log(err);
+	    	return;
+	    }
+
+	    // Update database by logged in user to reflect additional credit
+	    req.user.balance += charge_amt;
+	    req.user.save();
 	  })
 	  .then(() => {
 	    req.flash('messages', {
 	      status: 'success',
-	      value: `Thanks for purchasing a ${req.body.productName}!`
+	      value: `Thanks for adding money into your account!`
 	    });
-	    res.redirect('/products');
+	    res.redirect('/');
 	  })
 	  .catch((err) => {
 	    return next(err);
@@ -65,6 +97,17 @@ module.exports = (app, passport, db) => {
   // Account creation
   app.get('/account/create', (req, res) => {
     res.render('account_create', { error: req.flash('error') })
+  });
+
+  app.get('/viewjob', (req, res) => {
+      db.model.Job.findOne({ _id: req.query.id }, '_id title description deadline location numberRequired contactInfo payment author', function (err, job) {
+          if (err) {
+              console.log(err);
+              return
+          } else {
+              res.render('viewjob', { job: job })
+          }
+      });
   });
 
   app.post('/account/create', (req, res) => {
@@ -118,6 +161,24 @@ module.exports = (app, passport, db) => {
             res.redirect('/jobcreationconfirmation');
         }
     });
-});
+  });
+
+  app.post('/acceptjob', (req, res) => {
+      if (req.user == undefined){
+        res.redirect('/login');
+      } else if (req.user.type == "Requester") {
+        res.redirect('/login');
+      } else {
+        var id = req.query.id;
+        console.log("Accepting job id " + id + " by user " + req.user);
+        db.model.Job.update({ _id: id }, { worker: req.user }, {}, function (err, affected) {
+           if (err) {
+               console.log("Error accepting job: " + err);
+           } else {
+               res.redirect('/yourjobs');
+           }
+        });
+    }
+  });
 
 }
