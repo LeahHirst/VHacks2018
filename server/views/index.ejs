@@ -14,6 +14,7 @@
 	<link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
 	<link href='/style.css' rel='stylesheet' type='text/css'>
     <script src="/js/sort.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyANNoWpcaXbtXtxCOs5g0RSQfZpRqygsfw&libraries=places"></script>
 
 
 </head>
@@ -306,19 +307,6 @@ function getJobs(radius) {
   });
 }
 
-function geocode(address) {
-  var url = `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=AIzaSyD38U9Ngq-TCBrFzGtQHTqInCDZ0tP4f7U`;
-
-  url = encodeURI(url);
-
-  $.get(url, function(data, status) {
-    var location = data.results[0].geometry.location;
-    latitude = location.lat;
-    longitude = location.lng;
-    getJobs($('#radius').val());
-  });
-}
-
 function sortJobs(sortType) {
   if (sortType) sType = sortType;
   // Sort the array
@@ -363,22 +351,9 @@ $('input[type=range]').on('input', function () {
     $(this).trigger('change');
 });
 
-//setup before functions
-var typingTimer;                //timer identifier
-var doneTypingInterval = 1000;  //time in ms (5 seconds)
 
-//on keyup, start the countdown
-$('#location-text').keyup(function(){
-    clearTimeout(typingTimer);
-    if ($('#location-text').val()) {
-        typingTimer = setTimeout(doneTyping, doneTypingInterval);
-    }
-});
-
-//user is "finished typing," do something
-function doneTyping () {
-  geocode($('#location-text').val());
-}
+var input = document.getElementById('location-text');
+autocomplete = new google.maps.places.Autocomplete(input);
 
 </script>
 
