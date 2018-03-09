@@ -1,3 +1,4 @@
+
 module.exports = (app, passport, db) => {
 
   app.get('/', (req, res) => {
@@ -22,14 +23,75 @@ module.exports = (app, passport, db) => {
 		failureFlash: 'Invalid username or password.'
   }));
 
-  app.get('/logout', (req, res) => {
-    req.logout();
-    res.redirect('/login');
-  })
-
   // Jobs
   app.get('/jobs', (req, res) => {
+    var data = req.body;
 
+    // TODO: Support search radius
+    data.latitude = 0;
+    data.longitude = 0;
+    data.radius = 1000000; // km
+
+    var jobs = require('./jobs.js')(db)
+      .getJobsFromLocality(data.latitude, data.longitude, data.radius, (err, jobs) => {
+        res.render('view_jobs', { jobs: jobs });
+      });
+  });
+
+  app.get('/account', (req,res) => {
+  	if (!req.user){
+  		res.redirect('/login');
+  	}
+
+  	res.render('account', { user: req.user });
+  	// if (req.user.type == 'Requester'){
+  		
+  	// 	// render bio and past given jobs 
+  	// } else { // seeker 
+
+  	// 	// render seeker page with past completed jobs
+  	// }
+
+  });
+
+  app.get('/account/add_funds', (req,res) => {
+  	if (!req.user){
+  		res.redirect('/login');
+  	}
+  	res.render('add_funds', { loginError: req.flash('error') });
+  });
+
+  app.post('/account/charge', (req,res) => {
+  	  var stripe = require('stripe')('sk_test_yjY74aO0nY2faLr4CiV9kqNz'); // 4242 4242 4242 4242 test credit card
+  	  const stripeToken = req.body.stripeToken;
+  	  var charge_amt = parseFloat(req.body.amount);
+		
+	  // create charge
+	  const charge = {
+	    amount: charge_amt * 100.0, // convert to cents! 
+	    currency: 'eur', 
+	    card: stripeToken
+	  };
+	  stripe.charges.create(charge, (err, res) => {
+	    if (err) {
+	    	console.log(err);
+	    	return;
+	    }
+
+	    // Update database by logged in user to reflect additional credit
+	    req.user.balance += charge_amt;
+	    req.user.save();
+	  })
+	  .then(() => {
+	    req.flash('messages', {
+	      status: 'success',
+	      value: `Thanks for adding money into your account!`
+	    });
+	    res.redirect('/');
+	  })
+	  .catch((err) => {
+	    return next(err);
+	  });
   });
 
   // Account creation
@@ -50,6 +112,7 @@ module.exports = (app, passport, db) => {
 
   app.post('/account/create', (req, res) => {
     // TODO: Validation
+
 
     var data = req.body;
 

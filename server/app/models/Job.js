@@ -52,7 +52,7 @@ module.exports = new Schema({
         ref: "User",
         required: true
 	}],
-    worker: [{
+    claimedBy: [{
 	    type: Schema.ObjectId,
         ref: "User",
         required: false
