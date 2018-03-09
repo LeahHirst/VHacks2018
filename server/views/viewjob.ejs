@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>View job</title>
+</head>
+<body>
+<p>
+    Accept job
+    <form action="/acceptjob" method="POST">
+        <input type="hidden" name="id" id="id" value="<%= job._id %>"/>
+        <button>Take job</button>
+    </form>
+</p>
+<p>
+    <%= job.title %>
+    <%= job.description %>
+    <%= job.deadline %>
+    <%= job.numberRequired %>
+    <%= job.contactInfo %>
+    <%= job.payment %>
+    <%= job.location.longitude %>
+    <%= job.location.latitude %>
+</p>
+</body>
+</html>

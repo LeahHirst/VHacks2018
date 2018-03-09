@@ -43,10 +43,18 @@ module.exports = new Schema({
 		required: false
 	},
 	paid: {
-      type: Boolean,
-      default: false,
-      required: false
-  },
-	author: [{type: Schema.ObjectId, ref: "User"}],
-	claimedBy: [{type: Schema.ObjectId, ref: "User"}]
+        type: Boolean,
+        default: false,
+        required: false
+    },
+	author: [{
+	    type: Schema.ObjectId,
+        ref: "User",
+        required: true
+	}],
+    claimedBy: [{
+	    type: Schema.ObjectId,
+        ref: "User",
+        required: false
+	}]
 });

@@ -107,6 +107,17 @@ module.exports = (app, passport, db) => {
     res.render('account_create', { error: req.flash('error') })
   });
 
+  app.get('/job/:id', (req, res) => {
+      db.model.Job.findOne({ _id: req.params.id }, '_id title description deadline location numberRequired contactInfo payment author', function (err, job) {
+          if (err) {
+              console.log(err);
+              return
+          } else {
+              res.render('viewjob', { job: job })
+          }
+      });
+  });
+
   app.post('/account/create', (req, res) => {
     // TODO: Validation
 
@@ -179,5 +190,22 @@ module.exports = (app, passport, db) => {
   });
 
 
+  app.post('/job/claim', (req, res) => {
+      if (req.user == undefined){
+        res.redirect('/login');
+      } else if (req.user.type == "Requester") {
+        res.redirect('/login');
+      } else {
+        var id = req.query.id;
+        console.log("Accepting job id " + id + " by user " + req.user);
+        db.model.Job.update({ _id: id }, { $push: { claimedBy: req.user._id } }, function (err, affected) {
+           if (err) {
+               console.log("Error accepting job: " + err);
+           } else {
+               res.redirect('/yourjobs');
+           }
+        });
+    }
+  });
 
 }
