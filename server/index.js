@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const session  = require('express-session');
 const mstore   = require('connect-mongodb-session')(session);
+const flash    = require('connect-flash');
 
 const LocalStrategy = require('passport-local').Strategy;
 const cookieParser  = require('cookie-parser');
@@ -36,6 +37,7 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(flash())
 
 passport.use(new LocalStrategy({
   usernameField: "email",
