@@ -18,7 +18,7 @@ module.exports = new require('mongoose').Schema({
 	},
 	balance: {
 		type: Number,
-		default: 0.0
+		default: 0.0,
 		required: false
 	},
   phoneNumber: {
