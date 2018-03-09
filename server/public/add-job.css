@@ -170,6 +170,10 @@ body,html{
 
 }
 
+#profpic:hover {
+    opacity: .8; 
+}
+
 
 /*----------------------------*/
 /* SUB WHITE NAV BAR */
