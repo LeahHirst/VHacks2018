@@ -18,7 +18,7 @@ module.exports = new Schema({
 	image: {
 		type: String,
 		required: false
-	}
+	},
 	location: {
 		latitude: {
 			type: Number,
