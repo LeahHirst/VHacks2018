@@ -1,3 +1,4 @@
+
 module.exports = (app, passport, db) => {
 
   app.get('/', (req, res) => {
@@ -22,23 +23,53 @@ module.exports = (app, passport, db) => {
 		failureFlash: 'Invalid username or password.'
   }));
 
-  app.get('/logout', (req, res) => {
-    req.logout();
-    res.redirect('/login');
-  })
-
   // Jobs
   app.get('/jobs', (req, res) => {
 
   });
 
+
+  app.get('/account/add_funds', (req,res) => {
+  	res.render('add_funds', { loginError: req.flash('error') });
+  });
+
+  app.post('/account/add_funds/charge', (req,res) => {
+  	  var stripe = require('stripe')('sk_test_yjY74aO0nY2faLr4CiV9kqNz'); // 4242 4242 4242 4242 test credit card
+  	  const stripeToken = req.body.stripeToken;
+	  const productID = parseInt(req.body.productID);
+	  const productAmount = req.body.productAmount;
+	  const userID = parseInt(req.user.id);
+	  // validate product
+	  return routeHelpers.validateProduct(productID, productAmount)
+	  .then((product) => {
+	    // create charge
+	    const charge = {
+	      amount: productAmount * 100,
+	      currency: product.currency,
+	      card: stripeToken
+	    };
+	    routeHelpers.createCharge(charge, productID, userID);
+	  })
+	  .then(() => {
+	    req.flash('messages', {
+	      status: 'success',
+	      value: `Thanks for purchasing a ${req.body.productName}!`
+	    });
+	    res.redirect('/products');
+	  })
+	  .catch((err) => {
+	    return next(err);
+	  });
+  });
+
   // Account creation
   app.get('/account/create', (req, res) => {
     res.render('account_create', { error: req.flash('error') })
-  })
+  });
 
   app.post('/account/create', (req, res) => {
     // TODO: Validation
+
 
     var data = req.body;
 
