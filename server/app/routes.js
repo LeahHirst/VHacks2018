@@ -244,4 +244,14 @@ module.exports = (app, passport, db) => {
     }
   });
 
+  app.get('/reward', (req, res) => {
+  	if (req.user == undefined) {
+      res.redirect('/login');
+    } else if (req.user.type == "Requester") {
+      res.redirect('/');
+    } else{
+    	res.render('reward');
+    }
+  });
+
 }
