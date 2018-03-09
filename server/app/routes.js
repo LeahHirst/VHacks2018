@@ -27,10 +27,10 @@ module.exports = (app, passport, db) => {
   app.get('/jobs', (req, res) => {
     var data = req.body;
 
-    // testing
-    data.latitude = 41.9021616;
-    data.longitude = 12.4593827;
-    data.radius = 10; // km
+    // TODO: Support search radius
+    data.latitude = 0;
+    data.longitude = 0;
+    data.radius = 1000000; // km
 
     var jobs = require('./jobs.js')(db)
       .getJobsFromLocality(data.latitude, data.longitude, data.radius, (err, jobs) => {
