@@ -26,26 +26,28 @@ module.exports = (db) => {
       db.model.Job.find({
         'location.latitude': { $gte: latitude-rDist, $lt: latitude+rDist },
         'location.longitude': { $gt: longitude-rDist, $lt: latitude+rDist }
-      }, (err, jobs) => {
-        if (err) return cb(err);
+      })
+          .populate('author')
+          .exec((err, jobs) => {
+            if (err) return cb(err);
 
-        var x = jobs.length;
-        for (var i = 0; i < x; i++) {
-          // calc distance
-          var l = jobs[i].location;
-          var dist = calculateDistance(latitude, longitude, l.latitude, l.longitude);
+            var x = jobs.length;
+            for (var i = 0; i < x; i++) {
+              // calc distance
+              var l = jobs[i].location;
+              var dist = calculateDistance(latitude, longitude, l.latitude, l.longitude);
 
-          // Filter out
-          if (dist > searchRadius) {
-            array.splice(i, 1);
-            i--; x--;
-          } else {
-            jobs[i].distance = dist;
-          }
-        }
+              // Filter out
+              if (dist > searchRadius) {
+                array.splice(i, 1);
+                i--; x--;
+              } else {
+                jobs[i].distance = dist;
+              }
+            }
 
-        cb(null, jobs);
-      });
+            cb(null, jobs);
+          });
     },
     getJob: (id, cb) => {
       db.model.Job.findOne({ _id: id }, cb);
