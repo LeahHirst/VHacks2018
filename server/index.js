@@ -37,10 +37,10 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-passport.use(new LocalStrategy {
+passport.use(new LocalStrategy({
   usernameField: "email",
 	passwordField: "password"
-}, require('./app/authenticate.js')(db));
+}, require('./app/authenticate.js')(db)));
 
 // Register db
 var db = require('./app/database.js')(mongoose);
