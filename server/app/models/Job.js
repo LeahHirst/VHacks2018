@@ -11,5 +11,5 @@ module.exports = new Schema({
 		type: String,
 		required: true
 	},
-	poster: [{type: Schema.ObjectId, ref: "User"}]
+	author: [{type: Schema.ObjectId, ref: "User"}]
 });

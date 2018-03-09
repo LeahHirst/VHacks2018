@@ -22,6 +22,9 @@ store.on('error', function(error) {
 	assert.ok(false);
 });
 
+// Setup view engine
+app.set('view engine', 'ejs');
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
