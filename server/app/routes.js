@@ -1,8 +1,9 @@
 
 var howManyJobsShouldASeekerBeAbleToClaim = 5;
-var jobs = require('./jobs.js')(db);
 
 module.exports = (app, passport, db) => {
+
+  var jobs = require('./jobs.js')(db);
 
   app.get('/', (req, res) => {
     res.render('index.html');
@@ -45,8 +46,7 @@ module.exports = (app, passport, db) => {
     data.longitude = 0;
     data.radius = 1000000; // km
 
-    var jobs =
-      .getJobsFromLocality(data.latitude, data.longitude, data.radius, (err, jobs) => {
+    jobs.getJobsFromLocality(data.latitude, data.longitude, data.radius, (err, jobs) => {
         res.render('view_jobs', { jobs: jobs });
       });
   });
