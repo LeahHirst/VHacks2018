@@ -7,7 +7,7 @@
 <body>
 <p>
     Accept job
-    <form action="/acceptjob" method="POST">
+    <form action="/job/claim" method="POST">
         <input type="hidden" name="id" id="id" value="<%= job._id %>"/>
         <button>Take job</button>
     </form>

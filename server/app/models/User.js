@@ -21,7 +21,7 @@ module.exports = new require('mongoose').Schema({
 		default: 0.0,
 		required: false
 	},
-	photo_url:{
+	photo:{
 		type: String,
 		required: false
 	},
