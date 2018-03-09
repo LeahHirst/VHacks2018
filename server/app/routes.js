@@ -164,7 +164,7 @@ module.exports = (app, passport, db) => {
             contactInfo: req.body.contactInfo,
             payment: req.body.payment,
             author: req.user,
-            image: req.image
+            image: req.body.image
         });
         job.save(
             function (error) {
