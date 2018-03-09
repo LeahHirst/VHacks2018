@@ -39,11 +39,16 @@ module.exports = (db) => {
           if (dist > searchRadius) {
             array.splice(i, 1);
             i--; x--;
+          } else {
+            jobs[i].distance = dist;
           }
         }
 
         cb(null, jobs);
       });
+    },
+    getJob: (id, cb) => {
+      db.model.Job.findOne({ _id: id }, cb);
     }
   }
 }

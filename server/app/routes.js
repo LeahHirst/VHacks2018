@@ -1,8 +1,16 @@
 
+var howManyJobsShouldASeekerBeAbleToClaim = 5;
+var jobs = require('./jobs.js')(db);
+
 module.exports = (app, passport, db) => {
 
   app.get('/', (req, res) => {
     res.render('index.html');
+
+    // To feed jobs to home page:
+    //jobs.getJobsFromLocality(data.latitude, data.longitude, data.radius, (err, jobs) => {
+    //    res.render('view_jobs', { jobs: jobs });
+    //  });
   });
 
   app.get('/login', (req, res) => {
@@ -14,11 +22,11 @@ module.exports = (app, passport, db) => {
       res.redirect('/login');
   });
 
-  app.get('/createjob', (req, res) => {
+  app.get('/job/create', (req, res) => {
     res.render('createjob', { error: req.flash("error") });
   });
 
-  app.get('/jobcreationconfirmation', (req, res) => {
+  app.get('/job/create/confirmation', (req, res) => {
       res.render('jobcreationconfirmation', {});
   })
 
@@ -37,7 +45,7 @@ module.exports = (app, passport, db) => {
     data.longitude = 0;
     data.radius = 1000000; // km
 
-    var jobs = require('./jobs.js')(db)
+    var jobs =
       .getJobsFromLocality(data.latitude, data.longitude, data.radius, (err, jobs) => {
         res.render('view_jobs', { jobs: jobs });
       });
@@ -50,9 +58,9 @@ module.exports = (app, passport, db) => {
 
   	res.render('account', { user: req.user });
   	// if (req.user.type == 'Requester'){
-  		
-  	// 	// render bio and past given jobs 
-  	// } else { // seeker 
+
+  	// 	// render bio and past given jobs
+  	// } else { // seeker
 
   	// 	// render seeker page with past completed jobs
   	// }
@@ -70,11 +78,11 @@ module.exports = (app, passport, db) => {
   	  var stripe = require('stripe')('sk_test_yjY74aO0nY2faLr4CiV9kqNz'); // 4242 4242 4242 4242 test credit card
   	  const stripeToken = req.body.stripeToken;
   	  var charge_amt = parseFloat(req.body.amount);
-		
+
 	  // create charge
 	  const charge = {
-	    amount: charge_amt * 100.0, // convert to cents! 
-	    currency: 'eur', 
+	    amount: charge_amt * 100.0, // convert to cents!
+	    currency: 'eur',
 	    card: stripeToken
 	  };
 	  stripe.charges.create(charge, (err, res) => {
@@ -104,8 +112,8 @@ module.exports = (app, passport, db) => {
     res.render('account_create', { error: req.flash('error') })
   });
 
-  app.get('/viewjob', (req, res) => {
-      db.model.Job.findOne({ _id: req.query.id }, '_id title description deadline location numberRequired contactInfo payment author', function (err, job) {
+  app.get('/job/:id', (req, res) => {
+      db.model.Job.findOne({ _id: req.params.id }, '_id title description deadline location numberRequired contactInfo payment author', function (err, job) {
           if (err) {
               console.log(err);
               return
@@ -147,7 +155,7 @@ module.exports = (app, passport, db) => {
     });
   })
 
-  app.post('/createjob', (req, res) => {
+  app.post('/job/create', (req, res) => {
     var job = db.model.Job({
         title: req.body.title,
         description: req.body.description,
@@ -158,26 +166,45 @@ module.exports = (app, passport, db) => {
         payment: req.body.payment,
         author: req.user
     });
-    job.save(function (error) {
-        if (error) {
-            console.log(error);
-            req.flash("error", "Validation error, make sure to fill all fields correctly");
-            res.redirect('/createjob');
-        } else {
-            res.redirect('/jobcreationconfirmation');
-        }
-    });
+    job.save(
+      function (error) {
+          if (error) {
+              console.log(error);
+              req.flash("error", "Validation error, make sure to fill all fields correctly");
+              res.redirect('/job/create');
+          } else {
+              res.redirect('/job/create/confirmation');
+          }
+      });
   });
 
-  app.post('/acceptjob', (req, res) => {
+  app.post('/job/:id/claim', (req, res) => {
+    if (!req.user) {
+      res.redirect('/login');
+      return;
+    }
+
+    // Get the job
+    if (req.user.type == 'Seeker') {
+      db.model.Job.update({ _id: req.params.id }, {
+        $push: { claimedBy: req.user._id }
+      });
+    } else {
+      res.send('Only seekers can claim jobs!');
+    }
+
+  });
+
+
+  app.post('/job/:id/claim', (req, res) => {
       if (req.user == undefined){
         res.redirect('/login');
       } else if (req.user.type == "Requester") {
         res.redirect('/login');
       } else {
-        var id = req.query.id;
+        var id = req.params.id;
         console.log("Accepting job id " + id + " by user " + req.user);
-        db.model.Job.update({ _id: id }, { worker: req.user }, {}, function (err, affected) {
+        db.model.Job.update({ _id: id }, { $push: { claimedBy: req.user._id } }, function (err, affected) {
            if (err) {
                console.log("Error accepting job: " + err);
            } else {
