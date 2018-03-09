@@ -71,15 +71,17 @@ module.exports = (app, passport, db) => {
     var job = db.model.Job({
         title: req.body.title,
         description: req.body.description,
-        location: req.body.location,
         deadline: req.body.deadline,
+        location: {latitude: req.body.latitude, longitude: req.body.longitude},
+        numberRequired: req.body.numberRequired,
         contactInfo: req.body.contactInfo,
         payment: req.body.payment,
         author: req.user
     });
     job.save(function (error) {
         if (error) {
-            req.flash("error", error);
+            console.log(error);
+            req.flash("error", "Validation error, make sure to fill all fields correctly");
             res.redirect('/createjob');
         } else {
             res.redirect('/jobcreationconfirmation');

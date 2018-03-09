@@ -11,7 +11,7 @@ module.exports = new Schema({
 		type: String,
 		required: true
 	},
-	time: {
+	deadline: {
 		type: Date,
 		required: true
 	},
@@ -25,19 +25,15 @@ module.exports = new Schema({
 			required: true
 		}
 	},
-	number_required: {
+	numberRequired: {
 		type: Number,
 		required: true
 	},
-	contact_info: {
+	contactInfo: {
 		type: String,
 		required: true
 	},
-	skills_required: {
-		type: String,
-		required: false
-	},
-	payment_amount: {
+	payment: {
 		type: Number,
 		required: false
 	},
