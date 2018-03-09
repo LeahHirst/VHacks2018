@@ -39,6 +39,8 @@ module.exports = (db) => {
           if (dist > searchRadius) {
             array.splice(i, 1);
             i--; x--;
+          } else {
+            jobs[i].distance = dist;
           }
         }
 
