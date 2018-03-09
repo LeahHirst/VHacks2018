@@ -53,17 +53,17 @@
 		<div class="navbar object">
     		<div id="wrapper-sorting">
             <div id="wrapper-title-1">
-                <div id="relevance" class="relevance object active" onClick="sortJobs(SortType.relevance)">Relevance &#8594;</div>
+                <div id="relevance-button" class="relevance object active" onClick="sortJobs(SortType.relevance)">Distance &#8594;</div>
             	<div id="fleche-nav-1"></div>
     		</div>
 
             <div id="wrapper-title-2">
-                <a href="#"><div id="recent" class="recent object inactive" onClick="sortJobs(SortType.recent)">Recent &#8594;</div></a>
+                <a href="#"><div id="recent-button" class="recent object inactive" onClick="sortJobs(SortType.recent)">Recent &#8594;</div></a>
                 <div id="fleche-nav-2"></div>
     		</div>
 
             <div id="wrapper-title-3">
-                <a href="#"><div id="money" class="money object inactive" onClick="sortJobs(SortType.price)">&euro;&euro;&euro; - &euro; &#8594;</div></a>
+                <a href="#"><div id="money-button" class="money object inactive" onClick="sortJobs(SortType.price)">&euro;&euro;&euro; - &euro; &#8594;</div></a>
                 <div id="fleche-nav-3"></div>
     		</div>
             </div>
@@ -216,72 +216,6 @@
 	<script type="text/javascript" src="js/main.js"></script>
 	<script>
 
-
-
-
-
-/* PRELOADER */
-
-function preloader() {
-	if (document.images) {
-		var img1 = new Image();
-		var img2 = new Image();
-		var img3 = new Image();
-		var img4 = new Image();
-		var img5 = new Image();
-		var img6 = new Image();
-		var img7 = new Image();
-		var img8 = new Image();
-		var img9 = new Image();
-		var img10 = new Image();
-		var img11 = new Image();
-		var img12 = new Image();
-		var img13 = new Image();
-		var img14 = new Image();
-		var img15 = new Image();
-		var img16 = new Image();
-		var img17 = new Image();
-		var img18 = new Image();
-		var img19 = new Image();
-		var img20 = new Image();
-
-		img1.src = "/img/psd-4.jpg";
-		img2.src = "/img/font-1.jpg";
-		img3.src = "/img/psd-1.jpg";
-		img4.src = "/img/psd-2.jpg";
-		img5.src = "/img/ai-1.jpg";
-		img6.src = "/img/theme-2.jpg";
-		img7.src = "/img/psd-3.jpg";
-		img8.src = "/img/font-2.jpg";
-		img9.src = "/img/font-3.jpg";
-		img10.src = "/img/ai-2.jpg";
-		img11.src = "/img/icons-1.jpg";
-		img12.src = "/img/ui-1.jpg";
-		img13.src = "/img/font-5.jpg";
-		img14.src = "/img/theme-2.jpg";
-		img15.src = "/img/psd-5.jpg";
-		img16.src = "/img/icons-3.jpg";
-		img17.src = "/img/font-4.jpg";
-		img18.src = "/img/theme-3.jpg";
-		img19.src = "/img/font-6.jpg";
-		img20.src = "/img/theme-4.jpg";
-	}
-}
-function addLoadEvent(func) {
-	var oldonload = window.onload;
-	if (typeof window.onload != 'function') {
-		window.onload = func;
-	} else {
-		window.onload = function() {
-			if (oldonload) {
-				oldonload();
-			}
-			func();
-		}
-	}
-}
-addLoadEvent(preloader);
-
 function getLocation(cb) {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(location) {
@@ -295,7 +229,7 @@ function getLocation(cb) {
 
 var SortType = {
   relevance: function(a, b) {
-    return 0;
+    return a.distance > b.distance ? 1 : -1;
   },
   recent: function(a, b) {
     return a.created > b.created ? 1 : -1;
@@ -352,7 +286,7 @@ function template(job) {
       <div id="wrapper-part-info">
           <div class="part-info-image"><img src="/img/new/profile-images/2.jpg" alt=""/></div>
           <div id="part-info">${job.title}
-              <div class="right-data"> <h3>&euro;${job.payment}</h3> <h4>${tSince}</h4></div>
+              <div class="right-data"> <h3>&euro;${job.payment}</h3> <h4>${tSince}, ${job.distance}km away</h4></div>
           </div>
       </div>
   </figure>`;
@@ -378,6 +312,14 @@ function sortJobs(sortType) {
     container.append(template(jobs[i]));
   }
 
+  $('#relevance-button').removeClass('active').addClass('inactive');
+  $('#recent-button').removeClass('active').addClass('inactive');
+  $('#money-button').removeClass('active').addClass('inactive');
+
+  if (sType == SortType.relevance) $('#relevance-button').removeClass('inactive').addClass('active');
+  if (sType == SortType.recent) $('#recent-button').removeClass('inactive').addClass('active');
+  if (sType == SortType.price) $('#money-button').removeClass('inactive').addClass('active');
+
   if (jobs.length == 0) {
     container.append('<p style="text-align: center">No jobs to display.</p>');
   }
@@ -385,7 +327,7 @@ function sortJobs(sortType) {
 
 
 // Load default
-getJobs(1000);
+getJobs(10000000000);
 
 </script>
 
