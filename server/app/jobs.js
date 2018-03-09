@@ -46,6 +46,9 @@ module.exports = (db) => {
 
         cb(null, jobs);
       });
+    },
+    getJob: (id, cb) => {
+      db.model.Job.findOne({ _id: id }, cb);
     }
   }
 }
