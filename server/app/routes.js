@@ -14,6 +14,16 @@ module.exports = (app, passport, db) => {
 		failureFlash: 'Invalid username or password.'
   }));
 
+  app.get('/logout', (req, res) => {
+    req.logout();
+    res.redirect('/login');
+  })
+
+  // Jobs
+  app.get('/jobs', (req, res) => {
+
+  });
+
   // Account creation
   app.get('/account/create', (req, res) => {
     res.render('account_create', { error: req.flash('error') })
