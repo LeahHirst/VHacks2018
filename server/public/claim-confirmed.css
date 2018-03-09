@@ -1,0 +1,23 @@
+h1.congrats{
+	margin-bottom: 40px;
+	margin-top: 20px;
+	font-weight: 700;
+}
+
+input.description{
+	height: 115px;
+	width: 100%;
+}
+
+p.description{
+	font-size: 22px;
+}
+
+button.submit-description{
+	float: right;
+	margin-top: 15px;
+}
+
+div.form{
+	margin-top: 40px;
+}

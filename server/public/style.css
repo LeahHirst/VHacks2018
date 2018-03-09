@@ -712,6 +712,22 @@ body,html{
     background-color: rgba(255, 255, 255, .3);
 }
 
+#profpic {
+    height: 45px;
+    width: 45px;
+    object-fit: cover;
+    border-radius: 99px;
+    border: 2px solid white;
+    float: right;
+    position: relative;
+    top: 8px;
+
+}
+
+#profpic:hover {
+    opacity: .8;
+}
+
 /*----------------------------*/
 /* SEARCH BOX */
 /*----------------------------*/
@@ -721,7 +737,7 @@ body,html{
     width:170px;
     margin-top:13px;
     height:auto;
-    margin-right:25px;
+    margin-right:60px;
     display:block;
 }
 
