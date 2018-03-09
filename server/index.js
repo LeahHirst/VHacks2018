@@ -1,13 +1,26 @@
 const express  = require('express');
 const app      = express();
 const mongoose = require('mongoose');
-const passport = reuqire('passport');
+const passport = require('passport');
 const session  = require('express-session');
 const mstore   = require('connect-mongodb-session')(session);
 
 const LocalStrategy = require('passport-local').Strategy;
 const cookieParser  = require('cookie-parser');
 const bodyParser    = require('body-parser');
+
+// Store setup
+var store = new mstore(
+	{
+	  uri: 'mongodb://localhost:27017/vhacks-session',
+	  collection: 'mySessions'
+	});
+
+// Catch errors
+store.on('error', function(error) {
+	assert.ifError(error);
+	assert.ok(false);
+});
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
