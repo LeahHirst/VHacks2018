@@ -35,7 +35,19 @@ module.exports = (app, passport, db) => {
   // Account creation
   app.get('/account/create', (req, res) => {
     res.render('account_create', { error: req.flash('error') })
-  })
+  });
+
+  app.get('/viewjob', (req, res) => {
+      db.model.Job.findOne({ _id: req.query.id }, 'title description deadline location numberRequired contactInfo payment author', function (err, job) {
+          if (err) {
+              console.log(err);
+              return
+          } else {
+              console.log(job);
+              res.render('viewjob', { job: job })
+          }
+      });
+  });
 
   app.post('/account/create', (req, res) => {
     // TODO: Validation
