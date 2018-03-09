@@ -30,8 +30,8 @@ module.exports = (app, passport, db) => {
       res.render('jobcreationconfirmation', {});
   })
 
-  app.get('/job/list', (req, res) => {
-      var data = req.query;
+  app.post('/job/list', (req, res) => {
+      var data = req.body;
       jobs.getJobsFromLocality(data.latitude, data.longitude, data.radius, (err, jobs) => {
           if (err) {
               console.log(err);
