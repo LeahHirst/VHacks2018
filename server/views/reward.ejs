@@ -14,10 +14,12 @@
   <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
   <link href='/style.css' rel='stylesheet' type='text/css'>
     <script src="/js/sort.js"></script>
-
+    <script
+            src="https://code.jquery.com/jquery-3.3.1.js"
+            integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+            crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="/semantic/dist/semantic.min.css">
     <script src="/semantic/dist/semantic.min.js"></script>
-
 
 </head>
 
@@ -40,129 +42,95 @@
     </div>
 
         <div id="stripes"></div>
-        <a href="addjob.html"><button id="new-job" class="button">Add a job</button></a>
+        <a href="reward"><button style="width:140px; margin-right:60px" class="button" >Job reward</button></a>
     </div>
 </div>
-<br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br>
   <img class="ui centered medium circular image" src="/img/present.gif"> <br><br>
 <h1 class="ui center aligned header">
 
   Congratulations! You've earned a gift card!
 </h1><br>
 
-<h2 class="ui center aligned header">
-  Which one would you like?
+<h2 class="ui large center aligned header">
+  Your balance is €20. Which one would you like? 
 </h2><br>
 
+<!-- Although these gift certificates are statically coded, we did look into APIs which provide gift card services like 
+https://www.lightrail.com however, because theses applications require us to contact their sales team 
+to use their application, it wasn't feasible to integrate it for the hackathon. -->
+
 <div class="ui link centered cards">
-  <div class="card">
-    <div class="image">
-      <img src="/img/present">
+  <div class="small card" >
+    <div class="ui small centered image" style="height:150px;" >
+      <img src="/img/logo_carrefour.png" style="height:150px;" >
     </div>
     <div class="content">
-      <div class="header">Matt Giampietro</div>
+      <div class="header">Carrefour</div> 
       <div class="meta">
-        <a>Friends</a>
+        Supermarket - <i class="map icon"></i> 0.3 km Northeast
       </div>
       <div class="description">
-        Matthew is an interior designer living in New York.
+        Common purchases include
+        <ul class="ui list">
+          <li><b>€1</b> Pasta sfoglia</li>
+          <li><b>€3</b> Acqua naturale</li>
+        </ul>
       </div>
     </div>
-    <div class="extra content">
-      <span class="right floated">
-        Joined in 2013
-      </span>
-      <span>
-        <i class="user icon"></i>
-        75 Friends
-      </span>
-    </div>
+    <button onclick="window.open('/img/carrefour.pdf')" class="ui bottom attached basic green button">
+      <i class="gift icon"></i>
+      Claim
+    </button>
   </div>
-  <div class="card">
-    <div class="image">
-      <img src="/images/avatar2/large/molly.png">
+  <div class="small card">
+    <div class="ui small centered image" style="height:150px;">
+      <img src="/img/logo_pam.jpeg" style="height:150px;">
     </div>
     <div class="content">
-      <div class="header">Molly</div>
+      <div class="header">Pam Panorama</div>
       <div class="meta">
-        <span class="date">Coworker</span>
+        Groceries - <i class="map icon"></i> 0.7 km South
       </div>
       <div class="description">
-        Molly is a personal assistant living in Paris.
+        Common purchases include
+        <ul class="ui list">
+          <li><b>€1</b> Coffee</li>
+          <li><b>€3</b> Umbrella</li>
+        </ul>
       </div>
     </div>
-    <div class="extra content">
-      <span class="right floated">
-        Joined in 2011
-      </span>
-      <span>
-        <i class="user icon"></i>
-        35 Friends
-      </span>
-    </div>
+    <button onclick="window.open('/img/pam.pdf')" class="ui bottom attached basic green button">
+      <i class="gift icon"></i>
+      Claim
+    </button>
   </div>
-  <div class="card">
-    <div class="image">
-      <img src="/images/avatar2/large/elyse.png">
+  <div class="small card">
+    <div class="ui small centered image" style="height:150px;">
+      <img src="/img/logo_coop.png" style="height:150px;">
     </div>
     <div class="content">
-      <div class="header">Elyse</div>
+      <div class="header">Coop</div>
       <div class="meta">
-        <a>Coworker</a>
+        Supermarket - <i class="map icon"></i> 0.9 km West
       </div>
       <div class="description">
-        Elyse is a copywriter working in New York.
+        Common purchases include
+        <ul class="ui list">
+          <li><b>€4</b> Wool Blanket</li>
+          <li><b>€3</b> Acqua naturale</li>
+        </ul>
       </div>
     </div>
-    <div class="extra content">
-      <span class="right floated">
-        Joined in 2014
-      </span>
-      <span>
-        <i class="user icon"></i>
-        151 Friends
-      </span>
-    </div>
+    <button onclick="window.open('/img/coop.pdf')"  class="ui bottom attached basic green button">
+      <i class="gift icon"></i>
+      Claim
+    </button>
   </div>
-
-  <div id="main-container-footer">
-    <div class="container-footer">
-
-            <div id="row-1f">
-              <div class="text-row-1f"><span style="font-weight:600;font-size:15px;color:#666;line-height:250%;text-transform:uppercase;letter-spacing:1.5px;">What we do</span><br>We aim to foster social inclusion within our local communities by providing temporary jobs to those who need them.</div>
-            </div>
-
-            <div id="row-2f">
-              <div class="text-row-2f"><span style="font-weight:600;font-size:15px;color:#666;line-height:250%;text-transform:uppercase;letter-spacing:1.5px;">See a job you like?</span><br>Claim it and complete it, and you'll get a gift card for your the great work you did!</div>
-            </div>
-
-            <div id="row-3f">
-              <div class="text-row-3f"><span style="font-weight:600;font-size:15px;color:#666;line-height:250%;text-transform:uppercase;letter-spacing:1.5px;">Need a job done?</span><br>Create a job and someone in your community will be at your aid!</div>
-            </div>
-
-            <div id="row-4f">
-              <div class="text-row-4f"><span style="font-weight:600;font-size:15px;color:#666;line-height:250%;text-transform:uppercase;letter-spacing:1.5px;">Newsletter</span><br>You will be informed monthly about the latest content avalaible.</div>
-
-        <div id="main_tip_newsletter">
-          <form>
-            <input type="text" name="newsletter" id="tip_newsletter_input" list="newsletter" autocomplete=off required>
-          </form>
-        </div>
-            </div>
-
-    </div>
-  </div>
-
-
-</body>
+</div>
 
 <!-- SCRIPT -->
 
-    <script
-            src="https://code.jquery.com/jquery-3.3.1.js"
-            integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-            crossorigin="anonymous"></script>
-<!--  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>-->
     <script type="text/javascript" src="js/jquery.scrollTo.min.js"></script>
     <script type="text/javascript" src="js/jquery.localScroll.min.js"></script>
     <script type="text/javascript" src="js/jquery-animate-css-rotate-scale.js"></script>
