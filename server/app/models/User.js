@@ -9,7 +9,7 @@ module.exports = new require('mongoose').Schema({
 	},
 	type: {
 		type: String,
-		enum: ['Requester', 'Actioner'],
+		enum: ['Requester', 'Seeker'],
 		required: true
 	},
 	name: {
