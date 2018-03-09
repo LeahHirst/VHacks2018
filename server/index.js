@@ -10,6 +10,22 @@ const LocalStrategy = require('passport-local').Strategy;
 const cookieParser  = require('cookie-parser');
 const bodyParser    = require('body-parser');
 
+// Register db
+var db = require('./app/database.js')(mongoose);
+
+passport.serializeUser(function(user, done) {
+
+	done(null, user._id);
+});
+
+passport.deserializeUser(function(id, done) {
+	db.model.User.findOne({ _id: id }, (err, user) => {
+		if (err) return done(err);
+		if (!user) return done(null, false, 'User not found.');
+		return done(null, user);
+	});
+});
+
 // Store setup
 var store = new mstore(
 	{
@@ -37,10 +53,7 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(flash())
-
-// Register db
-var db = require('./app/database.js')(mongoose);
+app.use(flash());
 
 passport.use(new LocalStrategy({
   usernameField: "email",
