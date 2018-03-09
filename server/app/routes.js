@@ -38,6 +38,21 @@ module.exports = (app, passport, db) => {
       });
   });
 
+  app.get('/account', (req,res) => {
+  	if (!req.user){
+  		res.redirect('/login');
+  	}
+
+  	res.render('account', { user: req.user });
+  	// if (req.user.type == 'Requester'){
+  		
+  	// 	// render bio and past given jobs 
+  	// } else { // seeker 
+
+  	// 	// render seeker page with past completed jobs
+  	// }
+
+  });
 
   app.get('/account/add_funds', (req,res) => {
   	if (!req.user){
@@ -53,8 +68,8 @@ module.exports = (app, passport, db) => {
 		
 	  // create charge
 	  const charge = {
-	    amount: charge_amt * 100.0,
-	    currency: 'usd',
+	    amount: charge_amt * 100.0, // convert to cents! 
+	    currency: 'eur', 
 	    card: stripeToken
 	  };
 	  stripe.charges.create(charge, (err, res) => {
