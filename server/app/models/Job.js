@@ -47,5 +47,6 @@ module.exports = new Schema({
         default: false,
         required: false
     },
-	author: [{type: Schema.ObjectId, ref: "User"}]
+	author: [{type: Schema.ObjectId, ref: "User"}],
+	claimedBy: [{type: Schema.ObjectId, ref: "User"}]
 });
