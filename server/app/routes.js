@@ -6,19 +6,13 @@ module.exports = (app, passport, db) => {
   var jobs = require('./jobs.js')(db);
 
   app.get('/', (req, res) => {
-    res.render('index.html');
-
-    // To feed jobs to home page:
-    //jobs.getJobsFromLocality(data.latitude, data.longitude, data.radius, (err, jobs) => {
-    //    res.render('view_jobs', { jobs: jobs });
-    //  });
+    res.render('view_jobs', {});
   });
 
   app.get('/login', (req, res) => {
   	if (req.user){
   		return res.redirect('/account');
-  	}
-  	else {
+  	} else {
     	res.render('login', { loginError: req.flash('error') });
     }
   });
@@ -35,6 +29,17 @@ module.exports = (app, passport, db) => {
   app.get('/job/create/confirmation', (req, res) => {
       res.render('jobcreationconfirmation', {});
   })
+
+  app.get('/job/list', (req, res) => {
+      var data = req.query;
+      jobs.getJobsFromLocality(data.latitude, data.longitude, data.radius, (err, jobs) => {
+          if (err) {
+              console.log(err);
+          } else {
+              res.send(jobs);
+          }
+        });
+  });
 
   app.post('/login', passport.authenticate('local', {
     successRedirect: '/',
