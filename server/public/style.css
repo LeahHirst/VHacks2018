@@ -697,7 +697,7 @@ body,html{
     width:170px;
     margin-top:13px;
     height:auto;
-    margin-right:25px;
+    margin-right:60px;
     display:block;
 }
 
@@ -939,5 +939,14 @@ body,html{
 
 @media only screen and (max-width: 320px) {
 
+}
+
+#user-account{
+    display: flex;
+    position: absolute;
+    right: 0;
+    margin-top: 15px;
+    color: white;
+    font-size: 2em;
 }
 
