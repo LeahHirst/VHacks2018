@@ -112,6 +112,7 @@ body,html{
 	width:105%;
 	height:65px;
 	background-color:#2E2D30;
+	background-image: url("data:image/svg+xml,%3Csvg width='52' height='26' viewBox='0 0 52 26' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%234e5661' fill-opacity='0.4'%3E%3Cpath d='M10 10c0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6h2c0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4v2c-3.314 0-6-2.686-6-6 0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6zm25.464-1.95l8.486 8.486-1.414 1.414-8.486-8.486 1.414-1.414z' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
 	opacity:0;
 }
 
@@ -127,6 +128,19 @@ body,html{
 	position:absolute;
     margin-top:13.5px;
 	left:15px;
+
+	float:left;
+	text-align:left;
+	font-family: 'Roboto',sans-serif;
+    font-size: 20px;
+	height:40px;
+	line-height:40px;
+    margin-top:10px;
+	-webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+	text-transform: uppercase;
+	letter-spacing:1.5px;
+	color: ;
 }
 
 #stripes{
@@ -140,7 +154,8 @@ body,html{
 	display:none;
 }
 
-.logo img{height:100%;width:100%;}
+.logo img{width:100%;
+padding-top: 5px;}
 
 /*----------------------------*/
 /* SUB WHITE NAV BAR */
