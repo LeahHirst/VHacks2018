@@ -223,3 +223,10 @@
 .btn.red:hover, .btn.red:focus {
   background-color: #c0392b;
 }
+
+#back-home{
+	text-transform: uppercase;
+	letter-spacing: 1.5px;
+	font-size: 13px;
+	margin-bottom: 20px;
+}
