@@ -9,21 +9,21 @@
         <!-- Behavioral Meta Data -->
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-        <link rel="icon" type="image/png" href="img/small-logo-01.png">
+        <link rel="icon" type="image/png" href="/img/small-logo-01.png">
         <link href='http://fonts.googleapis.com/css?family=Roboto:400,900,900italic,700italic,700,500italic,400italic,500,300italic,300' rel='stylesheet' type='text/css'>
         <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
-        <link href='add-job.css' rel='stylesheet' type='text/css'>
+        <link href='/add-job.css' rel='stylesheet' type='text/css'>
 
 
         <!--    links for form styling-->
         <link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
-        <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
-        <link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
-        <link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
-        <link rel="stylesheet" type="text/css" href="css-form/util.css">
-        <link rel="stylesheet" type="text/css" href="css-form/main.css">
+        <link rel="stylesheet" type="text/css" href="/vendor/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="/vendor/animate/animate.css">
+        <link rel="stylesheet" type="text/css" href="/vendor/css-hamburgers/hamburgers.min.css">
+        <link rel="stylesheet" type="text/css" href="/vendor/select2/select2.min.css">
+        <link rel="stylesheet" type="text/css" href="/css-form/util.css">
+        <link rel="stylesheet" type="text/css" href="/css-form/main.css">
 
         <!--     google api key -->
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyANNoWpcaXbtXtxCOs5g0RSQfZpRqygsfw&libraries=places"></script>
@@ -71,24 +71,24 @@
                 <div class="bg-contact2">
                     <div class="container-contact2">
                         <div class="wrap-contact2">
-                            <form class="contact2-form validate-form">
+                            <form class="contact2-form validate-form" action="/job/create" method="POST">
                                 <span class="contact2-form-title">
                                     Job Details 	&#8594;
                                 </span>
 
                                 <div class="wrap-input2 validate-input" data-validate="Job name is required">
-                                    <input class="input2" type="text" name="job-name">
+                                    <input class="input2" type="text" name="title">
                                     <span class="focus-input2" data-placeholder="JOB NAME"></span>
                                 </div>
 
                                 <div class="wrap-input2 validate-input" data-validate="Job description is required">
-                                    <input class="input2" type="text" name="job-description">
+                                    <input class="input2" type="text" name="description">
                                     <span class="focus-input2" data-placeholder="DESCRIPTION"></span>
                                 </div>
 
                                 <div class="wrap-input2 validate-input" data-validate="Number of people is required">
                                     <span data-placeholder="Number of people needed"></span>
-                                    <input class="input2" type="text" name="job-people">
+                                    <input class="input2" type="text" name="numberRequired">
                                     <span class="focus-input2" data-placeholder="NO. PEOPLE NEEDED"></span>
 
                                 </div>
@@ -99,12 +99,24 @@
                                     <span class="focus-input2" data-placeholder="LOCATION"></span>
                                 </div>
 
+                                <input type="hidden" name="latitude" id="latitude" />
+                                <input type="hidden" name="longitude" id="longitude" />
+
                                 <script>
 
-                                    var input = document.getElementById('location');
+                                    function initializeAuto() {
+                                        var input = document.getElementById('location');
+                                        autocomplete = new google.maps.places.Autocomplete(input);
+                                        google.maps.event.addListener(autocomplete, 'place_changed', function () {
+                                            var place = autocomplete.getPlace();
+                                            $("#latitude").val(place.geometry.location.lat());
+                                            $("#longitude").val(place.geometry.location.lng());
+                                            // alert(place.address_components[0].long_name);
 
+                                        });
+                                    }
 
-                                    autocomplete = new google.maps.places.Autocomplete(input);
+                                    google.maps.event.addDomListener(window, 'load', initializeAuto);
 
                                 </script>
 
@@ -112,7 +124,7 @@
 
                                 <div class="wrap-input2 validate-input" data-validate="Deadline is required">
                                     <span data-placeholder="JOB DEADLINE"></span>
-                                    <input class="input2" type="date" name="job-deadline">
+                                    <input class="input2" type="date" name="deadline">
                                     <span class="focus-input2" data-placeholder="JOB DEADLINE"></span>
 
                                 </div>
@@ -124,12 +136,20 @@
 
                                 <img id="uploaded-image">
 
+                                <input type="hidden" name="image" id="encodedImage" />
                                 <script>
                                     var loadFile = function(event) {
                                         var output = document.getElementById('uploaded-image');
                                         output.src = URL.createObjectURL(event.target.files[0]);
+                                        test = event.target.files[0];
+                                        var reader = new FileReader();
+                                        reader.addEventListener("load", function () {
+                                            $('#encodedImage').val(reader.result);
+                                        }, false);
+                                        reader.readAsDataURL(event.target.files[0]);
                                     };
                                 </script>
+
 
                                 <input class="input2" type="file" name="job-email" onchange="loadFile(event)">
 
@@ -144,12 +164,12 @@
 
 
                                 <div class="wrap-input2 validate-input" data-validate="Email address is required">
-                                    <input class="input2" type="text" name="job-email">
+                                    <input class="input2" type="text" name="contactInfo">
                                     <span class="focus-input2" data-placeholder="CONTACT EMAIL"></span>
                                 </div>
 
                                 <div class="wrap-input2 validate-input" data-validate="Credit card is required">
-                                    <input class="input2" type="text" name="job-creditcard">
+                                    <input class="input2" type="text" name="payment">
                                     <span class="focus-input2" data-placeholder="CREDIT CARD NUMBER"></span>
                                 </div>
 
@@ -295,13 +315,13 @@
         <!-- SCRIPT -->
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-        <script type="text/javascript" src="js/jquery.scrollTo.min.js"></script>
-        <script type="text/javascript" src="js/jquery.localScroll.min.js"></script>
-        <script type="text/javascript" src="js/jquery-animate-css-rotate-scale.js"></script>
-        <script type="text/javascript" src="js/fastclick.min.js"></script>
-        <script type="text/javascript" src="js/jquery.flip.min.js"></script>
-        <script type="text/javascript" src="js/jquery.animate-colors-min.js"></script>
-        <script type="text/javascript" src="js/jquery.animate-shadow-min.js"></script>    
+        <script type="text/javascript" src="/js/jquery.scrollTo.min.js"></script>
+        <script type="text/javascript" src="/js/jquery.localScroll.min.js"></script>
+        <script type="text/javascript" src="/js/jquery-animate-css-rotate-scale.js"></script>
+        <script type="text/javascript" src="/js/fastclick.min.js"></script>
+        <script type="text/javascript" src="/js/jquery.flip.min.js"></script>
+        <script type="text/javascript" src="/js/jquery.animate-colors-min.js"></script>
+        <script type="text/javascript" src="/js/jquery.animate-shadow-min.js"></script>    
 
         <script>
 
@@ -550,21 +570,15 @@
 
             /*FORMULAIRE NEWSLETTER*/
 
-            $("form").on("submit", function(event) {
-                event.preventDefault();
-                $.post("/burstfly/form-burstfly-modified.asp",$("form").serialize(), function(data) {//alert(data);
-                });
-            });
-
         </script>
 
         <!-- for form -->
 
         <!--    <script src="vendor/jquery/jquery-3.2.1.min.js"></script>-->
-        <script src="vendor/bootstrap/js/popper.js"></script>
-        <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-        <script src="vendor/select2/select2.min.js"></script>
-        <script src="js-form/main.js"></script>
+        <script src="/vendor/bootstrap/js/popper.js"></script>
+        <script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+        <script src="/vendor/select2/select2.min.js"></script>
+        <script src="/js-form/main.js"></script>
 
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
