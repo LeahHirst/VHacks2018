@@ -4,7 +4,7 @@
 <head>
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Platz - Free Grid Wordpress Theme</title>
+<title>Job Detail Page</title>
 
 <!-- Behavioral Meta Data -->
 	<meta name="apple-mobile-web-app-capable" content="yes">
@@ -18,6 +18,10 @@
 	<script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
 
 	<script src="js/job-details.js" type="text/javascript"></script>
+	<script
+            src="https://code.jquery.com/jquery-3.3.1.js"
+            integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+            crossorigin="anonymous"></script>
 
 </head>
 
@@ -48,6 +52,15 @@
 <div id="wrapper-container">
 	<div id="container-box" class="container object">
 		<div id="main-container-image">
+			<!--TODO:  Link this up correctly-->
+			<a href="index.html">
+				<div id="back-home" class="font-style">
+					<i class="fas fa-chevron-left details-icon-time">
+					</i>
+					Back to Home Page
+
+				</div>
+			</a>
 			<div id="map-box">
 				<div id="map"></div>
 			</div>
@@ -127,7 +140,21 @@
 							</div>
 						</div>
 						<div id="job-action-column">
-							<button class="btn right-margin font-style" type="button"><span>FUND JOB</span></button>
+							<form id="money-form" class="inactive-donation">
+								<div id="money-div">
+
+									<input class="money-input" type='text' />
+									<button class="cancel-donation-button" onclick="cancelDonation()">
+										<p class="cancel-donation">
+											Cancel
+										</p>
+									</button>
+									
+								</div>
+							</form>
+							<button onclick="fundJob()" class="btn right-margin font-style" type="button" id="fund-job-btn"><span>FUND JOB</span>
+							</button>
+							
 							<button class="btn font-style" type="button"><span>CLAIM JOB</span></button>
 						</div>
 					</div>
@@ -136,14 +163,13 @@
 		</div>
 
 	</div>
+	<div class="footer-margin">
+	</div>
 </div>
 
 <!-- SCRIPT -->
 
-    <script
-            src="https://code.jquery.com/jquery-3.3.1.js"
-            integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-            crossorigin="anonymous"></script>
+    
 <!--	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>-->
     <script type="text/javascript" src="js/jquery.scrollTo.min.js"></script>
     <script type="text/javascript" src="js/jquery.localScroll.min.js"></script>

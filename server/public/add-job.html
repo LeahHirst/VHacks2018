@@ -12,7 +12,7 @@
     <link rel="icon" type="image/png" href="img/small-logo-01.png">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,900,900italic,700italic,700,500italic,400italic,500,300italic,300' rel='stylesheet' type='text/css'>
 	<link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
-    <link href='style2.css' rel='stylesheet' type='text/css'>
+    <link href='add-job.css' rel='stylesheet' type='text/css'>
     
     
 <!--    links for form styling-->
@@ -26,7 +26,7 @@
     <link rel="stylesheet" type="text/css" href="css-form/main.css">
     
 <!--     google api key -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyANNoWpcaXbtXtxCOs5g0RSQfZpRqygsfw&libraries=places"></script>
 	
 
 </head>
@@ -73,7 +73,7 @@
                         <div class="wrap-contact2">
                             <form class="contact2-form validate-form">
                                 <span class="contact2-form-title">
-                                    Tell us about this job!
+                                    Job Details
                                 </span>
 
                                 <div class="wrap-input2 validate-input" data-validate="Job name is required">
@@ -86,33 +86,94 @@
                                     <span class="focus-input2" data-placeholder="DESCRIPTION"></span>
                                 </div>
                                 
+                                <div class="wrap-input2 validate-input" data-validate="Number of people is required">
+                                    <span data-placeholder="Number of people needed"></span>
+                                    <input class="input2" type="date" name="job-people">
+                                    <span class="focus-input2" data-placeholder="NO. PEOPLE NEEDED"></span>
+
+                                </div>
+                                
+                                
                                 <div class="wrap-input2 validate-input" data-validate="Job location is required">
-                                    <input class="input2" type="text" name="job-location">
+                                    <input class="input2" id="location" type="text" name="job-location" placeholder="">
                                     <span class="focus-input2" data-placeholder="LOCATION"></span>
                                 </div>
                                 
-                                <div class="wrap-input2 validate-input" data-validate="Email address is required">
-                                    <input class="input2" type="text" name="job-email">
-                                    <span class="focus-input2" data-placeholder="CONTACT EMAIL"></span>
-                                </div>
+                                <script>
                                 
-                                <div class="wrap-input2 validate-input" data-validate="Payment form is required">
-                                    <input class="input2" type="text" name="job-payment">
-                                    <span class="focus-input2" data-placeholder="PAYMENT FORM"></span>
+                                    var input = document.getElementById('location');
+                                    
+
+                                    autocomplete = new google.maps.places.Autocomplete(input);
+                                
+                                </script>
+                                
+                                
+                                
+                                <div class="wrap-input2 validate-input" data-validate="Deadline is required">
+                                    <span data-placeholder="JOB DEADLINE"></span>
+                                    <input class="input2" type="date" name="job-deadline">
+                                    <span class="focus-input2" data-placeholder="JOB DEADLINE"></span>
+                                    
                                 </div>
 
                                
-
-                                <div class="container-contact2-form-btn">
-                                    <div class="wrap-contact2-form-btn">
-                                        <div class="contact2-form-bgbtn"></div>
-                                        <button class="contact2-form-btn">
-                                            Send Your Message
-                                        </button>
-                                    </div>
-                                </div>
                             </form>
                         </div>
+<!--                        -->
+                        
+                        <div id="right-form">
+                            <div class="wrap-contact2">
+                                <form class="contact2-form validate-form">
+                                    <span class="contact2-form-title">
+                                        Job Image
+                                    </span>
+                                    
+                                    <img id="uploaded-image">
+                                    
+                                    <script>
+                                        var loadFile = function(event) {
+                                            var output = document.getElementById('uploaded-image');
+                                            output.src = URL.createObjectURL(event.target.files[0]);
+                                        };
+                                    </script>
+                                    
+                                    <input class="input2" type="file" name="job-email" onchange="loadFile(event)">
+                                    
+                                    
+                                    
+                                    
+                               <p>&nbsp;</p>
+                                    <span class="contact2-form-title">
+                                        Your Details
+                                    </span>
+
+
+
+                                    <div class="wrap-input2 validate-input" data-validate="Email address is required">
+                                        <input class="input2" type="text" name="job-email">
+                                        <span class="focus-input2" data-placeholder="CONTACT EMAIL"></span>
+                                    </div>
+
+                                    <div class="wrap-input2 validate-input" data-validate="Payment form is required">
+                                        <input class="input2" type="text" name="job-payment">
+                                        <span class="focus-input2" data-placeholder="PAYMENT FORM"></span>
+                                    </div>
+
+
+
+                                    <div class="container-contact2-form-btn">
+                                        <div class="wrap-contact2-form-btn">
+                                            <div class="contact2-form-bgbtn"></div>
+                                            <button class="contact2-form-btn">
+                                                Send Your Message
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        
                     </div>
                 </div>
             
