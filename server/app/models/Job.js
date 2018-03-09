@@ -47,9 +47,9 @@ module.exports = new Schema({
 		required: false
 	},
 	paid: {
-		type: Boolean,
-		default: false,
-		required: false
-	},
+        type: Boolean,
+        default: false,
+        required: false
+    },
 	author: [{type: Schema.ObjectId, ref: "User"}]
 });

@@ -8,6 +8,14 @@ module.exports = (app, passport, db) => {
     res.render('login', { loginError: req.flash('error') });
   });
 
+  app.get('/createjob', (req, res) => {
+    res.render('createjob', { error: req.flash("error") });
+  });
+
+  app.get('/jobcreationconfirmation', (req, res) => {
+      res.render('jobcreationconfirmation', {});
+  })
+
   app.post('/login', passport.authenticate('local', {
     successRedirect: '/',
 		failureRedirect: '/login',
@@ -58,5 +66,25 @@ module.exports = (app, passport, db) => {
       });
     });
   })
+
+  app.post('/createjob', (req, res) => {
+    var job = db.model.Job({
+        title: req.body.title,
+        description: req.body.description,
+        location: req.body.location,
+        deadline: req.body.deadline,
+        contactInfo: req.body.contactInfo,
+        payment: req.body.payment,
+        author: req.user
+    });
+    job.save(function (error) {
+        if (error) {
+            req.flash("error", error);
+            res.redirect('/createjob');
+        } else {
+            res.redirect('/jobcreationconfirmation');
+        }
+    });
+});
 
 }
