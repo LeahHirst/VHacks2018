@@ -143,6 +143,12 @@ body,html{
     color: white;
 }
 
+#title-description {
+    text-transform: lowercase; 
+    font-size: 13px; 
+    letter-spacing: 0px; 
+}
+
 #stripes{
     background: url(img/stripes.svg) no-repeat;
     position:absolute;
@@ -194,13 +200,14 @@ body,html{
     letter-spacing:1.5px;
 }
 
-.active {color:#666;margin-left:15px;font-weight:500;}
+.active {color:#666;margin-left:15px;font-weight:500; margin-right: 25px; }
 /*.relevance{color:#666;margin-left:15px;font-weight:500;}*/
-.inactive {color: #CCC;margin-left:80px;font-weight:500;margin-left:40px;}
+.inactive {color: #CCC;margin-left:15px;font-weight:500; margin-right: 25px; }
 /*.recent,.money{color: #CCC;margin-left:80px;font-weight:500;margin-left:40px;}*/
 
 .recent:hover,.relevance:hover,.money:hover{color:#666;opacity:1;}
 
+/*
 #fleche-nav-1,#fleche-nav-2,#fleche-nav-3{
     float:left;
     margin-top:26px;
@@ -211,6 +218,7 @@ body,html{
 }
 
 #fleche-nav-2,#fleche-nav-3{opacity:0.5;}
+*/
 
 #wrapper-bouton-icon{display:block;}
 #bouton-ai,#bouton-psd,#bouton-photo,#bouton-font,#bouton-theme,#bouton-premium{
@@ -655,6 +663,29 @@ body,html{
     margin-left:20px;
     vertical-align:center;
     font-weight:400;
+}
+
+/*----------------------------*/
+/* BUTTON STYLING */
+/*----------------------------*/
+
+.button {
+    padding: 6px; 
+    border: 1px solid white; 
+    text-transform: uppercase; 
+    font: 16px/1.6 Helvetica, sans-serif; 
+    width: 110px; 
+    text-align: center; 
+    border-radius: 5px; 
+    color: white; 
+    float: right; 
+    margin-top: 12px; 
+    margin-right: 60px; 
+    background-color: rgba(255, 255, 255, 0); 
+}
+
+.button:hover {
+    background-color: rgba(255, 255, 255, .3); 
 }
 
 /*----------------------------*/
