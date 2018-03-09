@@ -15,7 +15,12 @@ module.exports = (app, passport, db) => {
   });
 
   app.get('/login', (req, res) => {
-    res.render('login', { loginError: req.flash('error') });
+  	if (req.user){
+  		return res.redirect('/account');
+  	}
+  	else {
+    	res.render('login', { loginError: req.flash('error') });
+    }
   });
 
   app.get('/logout', (req, res) => {
@@ -54,9 +59,9 @@ module.exports = (app, passport, db) => {
   app.get('/account', (req,res) => {
   	if (!req.user){
   		res.redirect('/login');
+  	} else {
+  		res.render('account', { user: req.user });
   	}
-
-  	res.render('account', { user: req.user });
   	// if (req.user.type == 'Requester'){
 
   	// 	// render bio and past given jobs
@@ -71,7 +76,9 @@ module.exports = (app, passport, db) => {
   	if (!req.user){
   		res.redirect('/login');
   	}
-  	res.render('add_funds', { loginError: req.flash('error') });
+  	else{
+  		res.render('add_funds', { loginError: req.flash('error') });
+  	}
   });
 
   app.post('/account/charge', (req,res) => {
