@@ -28,15 +28,17 @@ module.exports = (db) => {
         'location.longitude': { $gt: longitude-rDist, $lt: latitude+rDist }
       })
           .populate('author')
+          .lean()
           .exec((err, jobs) => {
             if (err) return cb(err);
+
+            jobs = JSON.parse(JSON.stringify(jobs));
 
             var x = jobs.length;
             for (var i = 0; i < x; i++) {
               // calc distance
               var l = jobs[i].location;
               var dist = calculateDistance(latitude, longitude, l.latitude, l.longitude);
-
               // Filter out
               if (dist > searchRadius) {
                 array.splice(i, 1);
