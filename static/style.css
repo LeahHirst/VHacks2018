@@ -732,6 +732,8 @@ padding-top: 5px;}
 .work figure {
 	width:calc(100% / 3 - 30px);
 }
+
+}
 }
 
 /* Small viewports — Old monitors, netbooks, tablets (landscape), etc. */
@@ -803,6 +805,7 @@ padding-top: 5px;}
 .work figure {
 	width:calc(100% / 2 - 30px);
 }
+
 }
 
 /* Mobile phones (Landscape) and Tablets (Portrait) */
