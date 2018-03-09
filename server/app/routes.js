@@ -6,7 +6,7 @@ module.exports = (app, passport, db) => {
   var jobs = require('./jobs.js')(db);
 
   app.get('/', (req, res) => {
-    res.render('view_jobs', {});
+    res.render('index', {});
   });
 
   app.get('/login', (req, res) => {
