@@ -1698,6 +1698,14 @@ input:focus::-webkit-datetime-edit{ color: #000; }
     background-color: white; 
     text-align: center; 
     align-items: center; 
+    padding-bottom: 50px; 
+}
+
+.row-box p {
+    width: 50%; 
+    font-family: Helvetica, 'sans-serif'; 
+    font-size: 14px; 
+    font-weight: 100; 
 }
 
 .row-box img {
