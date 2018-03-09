@@ -1,0 +1,18 @@
+h1.congrats{
+	margin-bottom: 40px;
+	margin-top: 40px;
+}
+
+input.description{
+	height: 115px;
+	width: 100%;
+}
+
+button.submit-description{
+	float: right;
+	margin-top: 15px;
+}
+
+div.form{
+	margin-top: 40px;
+}

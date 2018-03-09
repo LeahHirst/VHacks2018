@@ -1687,6 +1687,24 @@ input:focus::-webkit-datetime-edit{ color: #000; }
     margin-bottom: 20px; 
 }
 
+.row-box {
+    margin: 15px; 
+    display: flex; 
+    flex-direction: column; 
+    width: 80%; 
+    position: relative; 
+    left: 10%;; 
+    border-radius: 20px; 
+    background-color: white; 
+    text-align: center; 
+    align-items: center; 
+}
+
+.row-box img {
+    object-fit: contain; 
+    width: 50%; 
+}
+
 /*----------------------------*/
 /* COPYRIGHT PART IN BLACK DOWN*/
 /*----------------------------*/
