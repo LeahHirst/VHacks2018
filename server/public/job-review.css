@@ -1,0 +1,261 @@
+#container-box{
+	height: auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+#map-box{
+	background-color: red;
+	width: 100%;
+}
+
+#map{
+	width: 100%;
+	height: 200px;
+	background: gray;
+}
+
+#job-detail-container-box{
+	flex-direction: row;
+	display: flex;
+}
+
+#job-heading-column-container{
+	display: flex;
+	flex-direction: column;
+	flex: 1 0 0;
+}
+
+#job-detail-column-container{
+	display: flex;
+	flex-direction: column;
+	flex: 2 0 0;
+	margin-left: 60px;
+	margin-top: 15px;
+}
+
+#job-separator-row{
+	height: 2px;
+	margin-top: 30px;
+	margin-bottom: 15px;
+	background-color: #CCCCCC;
+}
+
+#job-contact-action-container{
+	display: flex;
+	justify-content: space-between;
+}
+
+#job-figure{
+	width:100%;
+}
+#job-details{
+	font-family: Helvetica, sans-serif;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+		font-size: 15px;
+		font-weight:400;
+		color:#666;
+		margin-bottom: 5%;
+}
+#job-details .detail-text{
+	margin-left: 15px;
+	line-height: 20px;
+	font-family: Helvetica, sans-serif; 
+		font-weight: 300; 
+}
+
+.detail-text {
+    margin-bottom: 7px; 
+    margin-top: 7px; 
+}
+
+.details-icon{
+	margin-right: 5px;
+}
+
+.details-icon-time{
+	margin-right: 8px;
+}
+
+#shorter-wrapper{
+	height: 50px;
+}
+
+.font-style{
+	font-family: Helvetica, sans-serif; 
+	-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+		font-weight: 500; 
+		color:#666;
+}
+
+#job-name-row{
+	font-size: 40px;
+	font-weight: 500;
+
+}
+
+.skill{
+	color: white;
+	padding: 5px;
+	border-radius:  5px;
+	width: fit-content;
+	font-size: 14px;
+	font-weight: 700;
+	margin-right: 10px;
+	display: inline-flex;
+	margin-top: 15px;
+}
+
+.orange{
+	background-color: #FF9800;
+}
+.pink{
+	background-color: #E91E63;
+}
+.cyan{
+	background-color: #00BCD4;
+}
+
+.light-gray{
+	color: #9F9F9F;
+}
+
+#job-poster-row{
+	font-size: 14px;
+	font-style: italic;
+	margin-top: 15px;
+}
+
+#job-description-row{
+	font-size: 14px;
+	font-weight: 500;
+	margin-top: 15px;
+}
+
+.contact-details{
+	font-size: 12px;
+}
+
+#phone-number,
+#email-address{
+	margin: 3px;
+}
+
+.right-margin{
+	margin-right: 15px;
+}
+
+.btn {
+	position: relative;
+
+	display: inline-flex;
+	padding: 0;
+
+	overflow: hidden;
+
+	border-width: 0;
+	outline: none;
+	border-radius: 5px;
+	border: 1px solid #2E2D30;
+	color: #2E2D30;
+	background-color: #F4F4F4;
+	  
+	transition: background-color .6s;
+}
+.btn span {
+	display: block;
+	padding: 12px 24px;
+}
+
+.btn:before {
+	content: "";
+
+	position: absolute;
+	top: 50%;
+	left: 50%;
+
+	display: block;
+	width: 0;
+	padding-top: 0;
+
+	border-radius: 100%;
+
+	background-color: rgba(236, 240, 241, .3);
+
+	-webkit-transform: translate(-50%, -50%);
+	-moz-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	-o-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+}
+
+.btn:active:before {
+	width: 120%;
+	padding-top: 120%;
+  
+	transition: width .2s ease-out, padding-top .2s ease-out;
+}
+
+#back-home{
+	text-transform: uppercase;
+	letter-spacing: 1.5px;
+	font-size: 13px;
+	margin-bottom: 20px;
+}
+
+.inactive-donation{
+	display: none;
+}
+
+.active-donation,
+.complete-donation{
+	display: inline-flex;
+}
+
+
+
+.complete-donation{
+	border: none;
+}
+
+.money-input{
+	height: 30px;
+	border-radius: 5px;
+}
+
+.cancel-donation{
+	text-align: right;
+	margin: 0px;
+	font-size: 12px;
+}
+
+.cancel-donation-button{
+	border: none;
+	display: flex;
+	background-color: #F4F4F4;
+}
+
+.bold-text{
+	font-weight: 700;
+}
+
+#job-action-column{
+	display: flex;
+	flex-direction: row;
+}
+
+.footer-margin{
+	height: 300px;
+}
+
+#main_tip_search{
+    float:right;
+    width:170px;
+    margin-top:13px;
+    height:auto;
+    margin-right:26px;
+    display:block;
+}
