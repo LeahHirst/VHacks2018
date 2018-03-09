@@ -1,26 +1,158 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
+
 <head>
-    <meta charset="utf-8">
-    <title>View job</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Job Detail Page</title>
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<link rel="icon" type="image/png" href="img/small-logo-01.png">
+	<link href='http://fonts.googleapis.com/css?family=Roboto:400,900,900italic,700italic,700,500italic,400italic,500,300italic,300' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+	<link href='/style.css' rel='stylesheet' type='text/css'>
+	<link href='/job-detail.css' rel='stylesheet' type='text/css'>
+	<script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+	<script src="/js/job-details.js" type="text/javascript"></script>
+	<script
+            		src="https://code.jquery.com/jquery-3.3.1.js"
+            		integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+           		crossorigin="anonymous">
+           	</script>
+           	<script type="text/javascript" src="/js/jquery.scrollTo.min.js"></script>
+	<script type="text/javascript" src="/js/jquery.localScroll.min.js"></script>
+	<script type="text/javascript" src="/js/jquery-animate-css-rotate-scale.js"></script>
+	<script type="text/javascript" src="/js/fastclick.min.js"></script>
+	<script type="text/javascript" src="/js/jquery.animate-colors-min.js"></script>
+	<script type="text/javascript" src="/js/jquery.animate-shadow-min.js"></script>
+	<script type="text/javascript" src="/js/main.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyANNoWpcaXbtXtxCOs5g0RSQfZpRqygsfw&callback=myMap"></script>
 </head>
+
+<script>
+
+
+</script>
+
 <body>
-<p>
-    Accept job
-    <form action="/job/claim" method="POST">
-        <input type="hidden" name="id" id="id" value="<%= job._id %>"/>
-        <button>Take job</button>
-    </form>
-</p>
-<p>
-    <%= job.title %>
-    <%= job.description %>
-    <%= job.deadline %>
-    <%= job.numberRequired %>
-    <%= job.contactInfo %>
-    <%= job.payment %>
-    <%= job.location.longitude %>
-    <%= job.location.latitude %>
-</p>
-</body>
-</html>
+
+
+  <%- include('navbar', { user: user }); %>
+
+<!-- JOB DETAIL -->
+<div id="wrapper-container">
+	<div id="container-box" class="container object">
+		<div id="main-container-image">
+			<a href="index.html">
+				<div id="back-home" class="font-style">
+					<i class="fas fa-chevron-left details-icon-time">
+					</i>
+					Back to Home Page
+
+				</div>
+			</a>
+			<div id="map-box">
+				<div id="map"></div>
+			</div>
+			<div id="job-detail-container-box">
+				<div id="job-heading-column-container">
+					<div class="work">
+						<figure id="job-figure" class="white">
+							<a href="#">
+								<img src="<%= job.image %>" alt="" />
+							</a>
+		                            				<div id="wrapper-part-info shorter-wrapper">
+			                            				<div class="part-info-image">
+			                            					<img src="<%= job.author[0].photo %>" alt="" width="28" height="28"/>
+			                            				</div>
+			                            				<div id="part-info">
+			                            					<%= job.title %>
+									<div class="right-data">
+										<h3>&euro;<%= job.payment %></h3>
+
+									</div>
+
+			                            				</div>
+
+
+							</div>
+							<div id="job-details">
+			                            				<div class="detail-text">
+			                            					<i class="fas fa-users details-icon">
+			                            					</i>
+			                            					3/4 Fulfilled
+			                            				</div>
+								<div  class="detail-text">
+									<i class="fas fa-stopwatch details-icon-time">
+			                            					</i>
+									Completion by <%= new Date(job.deadline).toLocaleDateString(); %>
+								</div>
+			                            			</div>
+						</figure>
+					</div>
+				</div>
+				<div id="job-detail-column-container" class="font-style">
+					<div id="job-name-row">
+						<%= job.title %>
+					</div>
+					<div id="job-skills-row">
+						<div class="skill orange">
+							CRAFTMANSHIP
+						</div>
+						<div class="skill pink">
+							GARDENING
+						</div>
+						<div class="skill cyan">
+							NEIGHBORHOOD MAINTENANCE
+						</div>
+					</div>
+					<div id="job-poster-row" class="light-gray">
+						Posted by <%= job.author[0].name %> <%= cSince %> ago
+						<i class="far fa-clock details-icon-time">
+			                            		</i>
+					</div>
+					<div id="job-description-row">
+						<p>
+						<%= job.description %>
+						<p>
+					</div>
+					<div id="job-separator-row">
+					</div>
+					<div id="job-contact-action-container">
+						<div id="job-contact-column" class="light-gray">
+							<img src="<%= job.author[0].photo %>" alt="" width="20" height="20"/>
+							Julian Smith
+							<div class="contact-details">
+								<p id="phone-number"><%= job.author[0].phoneNumber %></p>
+								<p id="email-address"><%= job.author[0].email %></p>
+							</div>
+						</div>
+						<div id="job-action-column">
+							<form id="money-form" class="inactive-donation">
+								<div id="money-div">
+
+									<input class="money-input" type='text' />
+									<button class="cancel-donation-button" onclick="cancelDonation()">
+										<p class="cancel-donation">
+											Cancel
+										</p>
+									</button>
+
+								</div>
+							</form>
+              <% if (user.type != "Seeker") { %>
+                <button onclick="fundJob()" class="btn right-margin font-style" type="button" id="fund-job-btn"><span>FUND JOB</span>
+  							</button>
+              <% } else { %>
+                <button class="btn font-style" type="button"><span>CLAIM JOB</span></button>
+              <% } %>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<div class="footer-margin">
+	</div>
+</div>

@@ -6,7 +6,11 @@ module.exports = (app, passport, db) => {
   var jobs = require('./jobs.js')(db);
 
   app.get('/', (req, res) => {
-    res.render('index', {});
+    if (req.user == undefined) {
+      res.redirect('/login')
+    } else {
+      res.render('index', { user: req.user });
+    }
   });
 
   app.get('/login', (req, res) => {
@@ -23,7 +27,8 @@ module.exports = (app, passport, db) => {
   });
 
   app.get('/job/create', (req, res) => {
-    res.render('add_job', { error: req.flash("error") });
+    if (req.user == undefined) res.redirect('/login');
+    else res.render('add_job', { user: req.user, error: req.flash("error") });
   });
 
   app.get('/job/create/confirmation', (req, res) => {
@@ -111,12 +116,45 @@ module.exports = (app, passport, db) => {
   });
 
   app.get('/job/:id', (req, res) => {
-      db.model.Job.findOne({ _id: req.params.id }, '_id title description deadline location numberRequired contactInfo payment author', function (err, job) {
+    if (req.user == undefined) {
+      res.redirect('/login');
+      return;
+    }
+
+      db.model.Job.findOne({ _id: req.params.id }).populate('author').populate('claimedBy').lean().exec(function (err, job) {
           if (err) {
               console.log(err);
-              return
           } else {
-              res.render('viewjob', { job: job })
+            function timeSince(date) {
+
+              var seconds = Math.floor((new Date() - date) / 1000);
+
+              var interval = Math.floor(seconds / 31536000);
+
+              if (interval > 1) {
+                return interval + " years";
+              }
+              interval = Math.floor(seconds / 2592000);
+              if (interval > 1) {
+                return interval + " months";
+              }
+              interval = Math.floor(seconds / 86400);
+              if (interval > 1) {
+                return interval + " days";
+              }
+              interval = Math.floor(seconds / 3600);
+              if (interval > 1) {
+                return interval + " hours";
+              }
+              interval = Math.floor(seconds / 60);
+              if (interval > 1) {
+                return interval + " minutes";
+              }
+              return Math.floor(seconds) + " seconds";
+            }
+
+            var cSince = timeSince(new Date(job.created));
+            res.render('viewjob', { user: req.user, job: job, cSince: cSince });
           }
       });
   });

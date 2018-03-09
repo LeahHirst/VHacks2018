@@ -28,27 +28,7 @@
 
 <!-- HEADER -->
 
-<div id="wrapper-header">
-	<div id="main-header" class="object">
-		<div class="logo">
-            Co.unity - <span id="title-description">helping your community help you</span>
-<!--            <img src="/img/new/logo.svg" alt="logo platz" style="height: 20%;">-->
-
-        </div>
-
-
-        <div id="main_tip_search">
-
-			<form>
-				<input type="text" name="search" id="tip_search_input" list="search" autocomplete=off required>
-			</form>
-		</div>
-        <div id="stripes"></div>
-        <a href="/job/create"><button id="new-job" class="button">Add a job</button></a>
-        <a href="reward"><button style="width:140px; margin-right:10px" class="button" >Job reward</button></a>
-    </div>
-
-</div>
+<%- include('navbar', { user: user }); %>
 
 <!-- NAVBAR -->
 
@@ -283,6 +263,9 @@ var longitude = 0;
 
 function template(job) {
   if (job.image == undefined) job.image = 'img/psd-4.jpg';
+  if (job.author) {
+
+  }
   var tSince = timeSince(new Date(job.created));
   if (job.distance != undefined) tSince += ", " + job.distance + 'km away';
   return `<figure class="white">
@@ -294,7 +277,7 @@ function template(job) {
           </dl>
       </a>
       <div id="wrapper-part-info">
-          <div class="part-info-image"><img src="/img/new/profile-images/2.jpg" alt=""/></div>
+          <div class="part-info-image"><img src="${job.author[0].photo}" alt=""/></div>
           <div id="part-info">${job.title}
               <div class="right-data"> <h3>&euro;${job.payment}</h3> <h4>${tSince}</h4></div>
           </div>
@@ -356,6 +339,13 @@ $('input[type=range]').on('input', function () {
 
 var input = document.getElementById('location-text');
 autocomplete = new google.maps.places.Autocomplete(input);
+google.maps.event.addListener(autocomplete, 'place_changed', function () {
+    var place = autocomplete.getPlace();
+    latitude = place.geometry.location.lat();
+    longitude = place.geometry.location.lng();
+
+    getJobs($('#radius').val());
+});
 
 </script>
 
