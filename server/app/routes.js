@@ -38,12 +38,11 @@ module.exports = (app, passport, db) => {
   });
 
   app.get('/viewjob', (req, res) => {
-      db.model.Job.findOne({ _id: req.query.id }, 'title description deadline location numberRequired contactInfo payment author', function (err, job) {
+      db.model.Job.findOne({ _id: req.query.id }, '_id title description deadline location numberRequired contactInfo payment author', function (err, job) {
           if (err) {
               console.log(err);
               return
           } else {
-              console.log(job);
               res.render('viewjob', { job: job })
           }
       });
@@ -99,6 +98,24 @@ module.exports = (app, passport, db) => {
             res.redirect('/jobcreationconfirmation');
         }
     });
-});
+  });
+
+  app.post('/acceptjob', (req, res) => {
+      if (req.user == undefined){
+        res.redirect('/login');
+      } else if (req.user.type == "Requester") {
+        res.redirect('/login');
+      } else {
+        var id = req.query.id;
+        console.log("Accepting job id " + id + " by user " + req.user);
+        db.model.Job.update({ _id: id }, { worker: req.user }, {}, function (err, affected) {
+           if (err) {
+               console.log("Error accepting job: " + err);
+           } else {
+               res.redirect('/yourjobs');
+           }
+        });
+    }
+  });
 
 }
