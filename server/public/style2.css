@@ -256,11 +256,12 @@ body,html{
 /*----------------------------*/
 
 #main-container-image {
-    float:left;
+/*    float:left;*/
     width:100%;
+    left: -500px; 
     height:auto;
     background-color:#F4F4F4;
-    margin-top:25px;
+    margin-top:0px;
     opacity:0;
 
 }

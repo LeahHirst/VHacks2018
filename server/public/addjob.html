@@ -13,6 +13,20 @@
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,900,900italic,700italic,700,500italic,400italic,500,300italic,300' rel='stylesheet' type='text/css'>
 	<link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
     <link href='style2.css' rel='stylesheet' type='text/css'>
+    
+    
+<!--    links for form styling-->
+    <link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+    <link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+    <link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+    <link rel="stylesheet" type="text/css" href="css-form/util.css">
+    <link rel="stylesheet" type="text/css" href="css-form/main.css">
+    
+<!--     google api key -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 	
 
 </head>
@@ -46,12 +60,65 @@
         </div>
     </div>
 
-<!-- PORTFOLIO -->
+    <!-- PORTFOLIO -->
 
-	<div id="wrapper-container">
-    
-		<div class="container object">
+        <div id="wrapper-container">
 
+
+
+                <div id="main-container-image">
+                
+                <div class="bg-contact2">
+                    <div class="container-contact2">
+                        <div class="wrap-contact2">
+                            <form class="contact2-form validate-form">
+                                <span class="contact2-form-title">
+                                    Tell us about this job!
+                                </span>
+
+                                <div class="wrap-input2 validate-input" data-validate="Job name is required">
+                                    <input class="input2" type="text" name="job-name">
+                                    <span class="focus-input2" data-placeholder="JOB NAME"></span>
+                                </div>
+                                
+                                <div class="wrap-input2 validate-input" data-validate="Job description is required">
+                                    <input class="input2" type="text" name="job-description">
+                                    <span class="focus-input2" data-placeholder="DESCRIPTION"></span>
+                                </div>
+                                
+                                <div class="wrap-input2 validate-input" data-validate="Job location is required">
+                                    <input class="input2" type="text" name="job-location">
+                                    <span class="focus-input2" data-placeholder="LOCATION"></span>
+                                </div>
+                                
+                                <div class="wrap-input2 validate-input" data-validate="Email address is required">
+                                    <input class="input2" type="text" name="job-email">
+                                    <span class="focus-input2" data-placeholder="CONTACT EMAIL"></span>
+                                </div>
+                                
+                                <div class="wrap-input2 validate-input" data-validate="Payment form is required">
+                                    <input class="input2" type="text" name="job-payment">
+                                    <span class="focus-input2" data-placeholder="PAYMENT FORM"></span>
+                                </div>
+
+                               
+
+                                <div class="container-contact2-form-btn">
+                                    <div class="wrap-contact2-form-btn">
+                                        <div class="contact2-form-bgbtn"></div>
+                                        <button class="contact2-form-btn">
+                                            Send Your Message
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            
+      
+
+<!--
 			<div id="main-container-image">
             	
                 <div class="title-item">
@@ -137,6 +204,7 @@
 					</div>
                 </div>
 			</div>	
+-->
 		</div>
          
             
@@ -323,73 +391,7 @@ $(document).on('touchend mouseout', '#cross-menu', function(event){
         }
 });
 
-/* MENU SIDE CLOSE */
-
-var MENUSIDECLOSE = document.getElementById('cross-menu');
-
-MENUSIDECLOSE.addEventListener('click', function() {
-			   $("#main-container-menu").stop().animate({'left':'-100%'},300);	
-}); 
-
-/* BOUTON MENU ARROW-2 */
-
-$(document).on('touchstart mouseover', '#wrapper-title-2', function(event){
-
-        event.stopPropagation();
-        event.preventDefault();
-        if(event.handled !== true) {
-			
-			   $("#fleche-nav-2").stop().animate({rotate: '90deg',opacity:'1'},300);	
-
-            event.handled = true;
-        } else {
-            return false;
-        }
-});
-
-$(document).on('touchend mouseout', '#wrapper-title-2', function(event){
-	
-        event.stopPropagation();
-        event.preventDefault();
-        if(event.handled !== true) {
-			
-			   $("#fleche-nav-2").stop().animate({rotate: '0deg',opacity:'0.5'},300);	
-
-            event.handled = true;
-        } else {
-            return false;
-        }
-});
-
-/* BOUTON MENU ARROW-3 */
-
-$(document).on('touchstart mouseover', '#wrapper-title-3', function(event){
-
-        event.stopPropagation();
-        event.preventDefault();
-        if(event.handled !== true) {
-			
-			   $("#fleche-nav-3").stop().animate({rotate: '90deg',opacity:'1'},300);	
-
-            event.handled = true;
-        } else {
-            return false;
-        }
-});
-
-$(document).on('touchend mouseout', '#wrapper-title-3', function(event){
-	
-        event.stopPropagation();
-        event.preventDefault();
-        if(event.handled !== true) {
-			
-			   $("#fleche-nav-3").stop().animate({rotate: '0deg',opacity:'0.5'},300);	
-
-            event.handled = true;
-        } else {
-            return false;
-        }
-});
+        
 
 /* BOUTON MENU */
 
@@ -523,6 +525,24 @@ $("form").on("submit", function(event) {
 });
 
 </script>
+    
+<!-- for form -->
+    
+<!--    <script src="vendor/jquery/jquery-3.2.1.min.js"></script>-->
+    <script src="vendor/bootstrap/js/popper.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="vendor/select2/select2.min.js"></script>
+    <script src="js-form/main.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-23581568-13');
+    </script>
 
 
 </body>
