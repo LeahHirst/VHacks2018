@@ -286,7 +286,7 @@ function template(job) {
 }
 
 function getJobs(radius) {
-  $.post("/job/list", { latitude: 0, longitude: 0, radius: radius }, function(data, status) {
+  $.post("/job/list", { latitude: latitude, longitude: longitude, radius: radius }, function(data, status) {
     jobs = data;
     sortJobs();
   });
