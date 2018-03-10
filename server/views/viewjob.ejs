@@ -145,7 +145,10 @@
                   <button onclick="fundJob()" class="btn right-margin font-style" type="button" id="fund-job-btn"><span>FUND JOB</span>
     							</button>
                 <% } else { %>
-                  <button class="btn font-style" type="button"><span>CLAIM JOB</span></button>
+                  <form method="post" action="/job/claim">
+                    <input id="jobId" name="jobId" type="hidden" value="<%= job._id %>">
+                    <button class="btn font-style" type="button"><span>CLAIM JOB</span></button>
+                  </form>
                 <% } %>
               <% } else if (job.confirmed) { %>
                 <% if (user.type == "Seeker") { %>
@@ -156,8 +159,11 @@
                 <% } %>
               <% } else { %>
                 <% if (user.type != "Seeker") { %>
-                  <button class="btn font-style" type="button"><span>APPROVE WORK</span></button>
-                    <button class="btn font-style" type="button"><span>REQUEST RESUBMISSION</span></button>
+                  <form method="post" action="/job/approve">
+                      <input id="jobId" name="jobId" type="hidden" value="<%= job._id %>">
+                      <button class="btn font-style" type="button"><span>APPROVE WORK</span></button>
+                  </form>
+                  <button class="btn font-style" type="button"><span>REQUEST RESUBMISSION</span></button>
                 <% } %>
               <% } %>
 
