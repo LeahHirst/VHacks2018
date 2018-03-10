@@ -139,12 +139,25 @@
 
 								</div>
 							</form>
-              <% if (user.type != "Seeker") { %>
-                <button onclick="fundJob()" class="btn right-margin font-style" type="button" id="fund-job-btn"><span>FUND JOB</span>
-  							</button>
+              <% if (job.claimedBy.length < job.numberRequired) { %>
+                <!-- Job still waiting on people -->
+                <% if (user.type != "Seeker") { %>
+                  <button onclick="fundJob()" class="btn right-margin font-style" type="button" id="fund-job-btn"><span>FUND JOB</span>
+    							</button>
+                <% } else { %>
+                  <button class="btn font-style" type="button"><span>CLAIM JOB</span></button>
+                <% } %>
+              <% } else if (job.confirmed) { %>
+                <% if (user.type == "Seeker") { %>
+                  <button class="btn font-style" type="button"><span>MARK AS COMPLETED</span></button>
+                <% } %>
               <% } else { %>
-                <button class="btn font-style" type="button"><span>CLAIM JOB</span></button>
+                <% if (user.type != "Seeker") { %>
+                  <button class="btn font-style" type="button"><span>APPROVE WORK</span></button>
+                    <button class="btn font-style" type="button"><span>REQUEST RESUBMISSION</span></button>
+                <% } %>
               <% } %>
+
 
 						</div>
 					</div>

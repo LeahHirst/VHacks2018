@@ -266,20 +266,21 @@ function template(job) {
   if (job.author) {
 
   }
-  var tSince = timeSince(new Date(job.created));
+  var tSince = timeSince(new Date(job.created)) + ' ago';
   if (job.distance != undefined) tSince += ", " + job.distance + 'km away';
   return `<figure class="white">
       <a href="/job/${job._id}">
           <img class="job-image" src="${job.image}" alt="" />
           <dl>
               <dt>${job.title}</dt>
+              <dd style="margin-top: -6px; margin-bottom: 3px;"><i>${tSince}</i></dd>
               <dd>${job.description}</dd>
           </dl>
       </a>
       <div id="wrapper-part-info">
           <div class="part-info-image"><img src="${job.author[0].photo}" alt=""/></div>
           <div id="part-info">${job.title}
-              <div class="right-data"> <h3>&euro;${job.payment}</h3> <h4>${tSince}</h4></div>
+              <div class="right-data"> <h3>&euro;${job.payment}</h3></div>
           </div>
       </div>
   </figure>`;
@@ -302,6 +303,7 @@ function sortJobs(sortType) {
 
   for (var i = 0; i < jobs.length; i++) {
     // Append to the container
+    jobs[i].distance = Math.floor(jobs[i].distance);
     container.append(template(jobs[i]));
   }
 
