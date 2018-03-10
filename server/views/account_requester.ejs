@@ -30,32 +30,8 @@
 
 <!-- HEADER -->
 
-<div id="wrapper-header">
-	<div id="main-header" class="object">
-		<div class="logo">
-			Co.unity - <span id="title-description">helping your community help you</span>
-<!--            <img src="img/new/logo.svg" alt="logo platz" style="height: 20%;">-->
-		
-		</div>
-		
-		
-		<div id="main_tip_search"> 
-			<form>
-				<input type="text" name="search" id="tip_search_input" list="search" autocomplete=off required>
-			</form>
-		</div>
-		
-		<div id="stripes"></div>
-		<a href="/job/create"><button id="new-job" class="button">Add a job</button></a>
-		<div id="user-account">
-			<a href="/account" id="account-a-tag">
-				<i class="fas fa-user-circle">
-				</i>
-			</a>
-		</div>
-	</div>
-</div>
-	
+<%- include('navbar', { user: user }); %>
+
 
 	<div id="wrapper-container" class="user-container-white">
 		<div id="container-box" class="container object">
@@ -75,9 +51,9 @@
 							<p class="min-margins"><%= user.phoneNumber %></p>
 						</div>
 					</div>
-					
+
 				</div>
-				
+
 			</div>
 		</div>
 	</div>
@@ -87,7 +63,7 @@
 			<div id="container-box" class="container object">
 				<div class="font-style">
 					<h2>Pending Jobs</h2>
-				</div>	
+				</div>
 				<div>
 					<div id="job-detail-container-box">
 						<div id="job-heading-column-container">
@@ -160,7 +136,7 @@
 			<div id="container-box" class="container object">
 				<div class="font-style">
 					<h2>Completed Jobs</h2>
-				</div>	
+				</div>
 				<div>
 					<div id="job-detail-container-box">
 						<div id="job-heading-column-container">
@@ -208,40 +184,40 @@
 
 
 	</div>
-			
+
 	<div id="main-container-footer">
 		<div class="container-footer">
-			
+
 			<div id="row-1f">
 				<div class="text-row-1f"><span style="font-weight:600;font-size:15px;color:#666;line-height:250%;text-transform:uppercase;letter-spacing:1.5px;">What we do</span><br>We aim to foster social inclusion within our local communities by providing temporary jobs to those who need them.</div>
 			</div>
-			
+
 			<div id="row-2f">
 				<div class="text-row-2f"><span style="font-weight:600;font-size:15px;color:#666;line-height:250%;text-transform:uppercase;letter-spacing:1.5px;">See a job you like?</span><br>Claim it and complete it, and you'll get a gift card for your the great work you did!</div>
 			</div>
-			
+
 			<div id="row-3f">
 				<div class="text-row-3f"><span style="font-weight:600;font-size:15px;color:#666;line-height:250%;text-transform:uppercase;letter-spacing:1.5px;">Need a job done?</span><br>Create a job and someone in your community will be at your aid!</div>
 			</div>
-			
+
 			<div id="row-4f">
 				<div class="text-row-4f"><span style="font-weight:600;font-size:15px;color:#666;line-height:250%;text-transform:uppercase;letter-spacing:1.5px;">Newsletter</span><br>You will be informed monthly about the latest content avalaible.</div>
 
-				<div id="main_tip_newsletter"> 
+				<div id="main_tip_newsletter">
 					<form>
 						<input type="text" name="newsletter" id="tip_newsletter_input" list="newsletter" autocomplete=off required>
 					</form>
 				</div>
 			</div>
-			
+
 		</div>
 	</div>
-	
-	
+
+
 	<div id="wrapper-copyright">
 		<div class="copyright">
 			<div class="copy-text object">Copyright © 2018. </div>
-			
+
 			<div class="wrapper-navbouton">
 <!--
 				<div class="google object">g</div>
@@ -272,7 +248,7 @@
 	<script type="text/javascript" src="/js/jquery.animate-shadow-min.js"></script>
 	<script type="text/javascript" src="/js/main.js"></script>
 	<script>
-	
+
 
 
 </body>
