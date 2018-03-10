@@ -115,7 +115,8 @@
 											<div  class="detail-text">
 												<i class="fas fa-stopwatch details-icon-time">
 												</i>
-												Completion by <%= jobs[i].deadline %>
+												<% console.log(jobs[i].deadline); console.log(jobs[i].deadline.day) %>
+												Completion by <%= new Date(jobs[i].deadline).toLocaleDateString(); %>
 											</div>
 										</div>
 									</figure>
@@ -165,12 +166,12 @@
 										<div class="detail-text">
 											<i class="fas fa-users details-icon">
 											</i>
-											3/4 Fulfilled (TEST DATA)
+											Fulfilled
 										</div>
 										<div  class="detail-text">
 											<i class="fas fa-stopwatch details-icon-time">
 											</i>
-											Completion by <%= doneJobs[i].deadline %>
+											Completion by <%= new Date(jobs[i].deadline).toLocaleDateString(); %>
 										</div>
 									</div>
 								</figure>

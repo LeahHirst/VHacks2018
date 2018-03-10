@@ -37,17 +37,26 @@
 
 <div id="wrapper-header">
 	<div id="main-header" class="object">
-		<div class="logo">
-            Counity
-<!--            <img src="img/new/logo.svg" alt="logo platz" style="height: 20%;">-->
-        
+        <div class="logo">
+            Co.unity - <span id="title-description">helping your community help you</span>
+            <!--            <img src="img/new/logo.svg" alt="logo platz" style="height: 20%;">-->
+
         </div>
-        <div id="main_tip_search"> 
-			<form>
-				<input type="text" name="search" id="tip_search_input" list="search" autocomplete=off required>
-			</form>
-		</div>
+
+        <div id="main_tip_search" style="margin-right: 65px;">
+            <form>
+                <input type="text" name="search" id="tip_search_input" list="search" autocomplete=off required>
+            </form>
+        </div>
+
         <div id="stripes"></div>
+        <a href="add-job.html"><button id="new-job" class="button">Add a job</button></a>
+        <div id="user-account">
+            <a href="../views/account-job-poster.html" id="account-a-tag">
+                <i class="fas fa-user-circle">
+                </i>
+            </a>
+        </div>
     </div>
 </div>
 
@@ -156,8 +165,9 @@
 							</form>
 							<button onclick="fundJob()" class="btn right-margin font-style" type="button" id="fund-job-btn"><span>FUND JOB</span>
 							</button>
-							
-							<button class="btn font-style" type="button"><span>CLAIM JOB</span></button>
+							<a href="job-claim-confirmed.html">
+								<button class="btn font-style btn-height-taller" type="button"><span>CLAIM JOB</span></button>
+							</a>
 						</div>
 					</div>
 				</div>
