@@ -32,7 +32,7 @@ module.exports = (app, passport, db) => {
   });
 
   app.get('/job/create/confirmation', (req, res) => {
-      res.render('jobcreationconfirmation', {});
+      res.render('jobcreationconfirmation', { user: req.user });
   })
 
   app.post('/job/list', (req, res) => {
