@@ -247,7 +247,7 @@ module.exports = (app, passport, db) => {
            if (err) {
                console.log("Error accepting job: " + err);
            } else {
-               res.redirect('/myjobs');
+               res.redirect('/account');
            }
         });
     }
