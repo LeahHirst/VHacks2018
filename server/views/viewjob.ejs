@@ -25,13 +25,7 @@
 	<script type="text/javascript" src="/js/jquery.animate-colors-min.js"></script>
 	<script type="text/javascript" src="/js/jquery.animate-shadow-min.js"></script>
 	<script type="text/javascript" src="/js/main.js"></script>
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyANNoWpcaXbtXtxCOs5g0RSQfZpRqygsfw&callback=myMap"></script>
 </head>
-
-<script>
-
-
-</script>
 
 <body>
 
@@ -79,7 +73,9 @@
 				</div>
         <% } %>
   			<div id="map-box">
-  				<div id="map"></div>
+          <!-- Image for demo purposes (no internet) -->
+  				<div id="map" style="background-image: url('/img/mapph.png'); background-size: cover;
+    background-position-y: -50px;"></div>
   			</div>
 			<div id="job-detail-container-box">
 				<div id="job-heading-column-container">
@@ -205,4 +201,28 @@
 	</div>
 	<div class="footer-margin">
 	</div>
+
+	<!-- <script>
+
+    $('#map').hide();
+      var map;
+      var location = {lat: <%= job.location.latitude %>, lng: <%= job.location.longitude %>};
+      function initMap() {
+        $('#map').show();
+
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: <%= job.location.latitude %>, lng: <%= job.location.longitude %>},
+          zoom: 13
+        });
+
+        // var marker = new google.maps.Marker({
+        //   position: uluru,
+        //   map: map
+        // });
+      }
+
+  </script> -->
+
+  <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyANNoWpcaXbtXtxCOs5g0RSQfZpRqygsfw&callback=initMap" async defer></script> -->
+
 </div>
