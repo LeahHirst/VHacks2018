@@ -39,26 +39,7 @@
         <div class="cache"></div>
 
         <!-- HEADER -->
-
-        <div id="wrapper-header">
-            <div id="main-header" class="object">
-                <div class="logo">
-                    Co.unity - <span id="title-description">helping your community help you</span>
-                    <!--            <img src="img/new/logo.svg" alt="logo platz" style="height: 20%;">-->
-
-                </div>
-
-                <a href="profile.html"><img id="profpic" src="img/new/profile-images/5.jpg"></a>
-                <div id="main_tip_search"> 
-                    <form>
-                        <input type="text" name="search" id="tip_search_input" list="search" autocomplete=off required>
-                    </form>
-                </div>
-
-                <div id="stripes"></div>
-                <a href="add-job.html"><button id="new-job" class="button">Add a job</button></a>
-            </div>
-        </div>
+        <%- include('navbar', { user: user }); %>
 
         <!-- PORTFOLIO -->
 
@@ -231,7 +212,7 @@
         <script type="text/javascript" src="/js/fastclick.min.js"></script>
         <script type="text/javascript" src="/js/jquery.flip.min.js"></script>
         <script type="text/javascript" src="/js/jquery.animate-colors-min.js"></script>
-        <script type="text/javascript" src="/js/jquery.animate-shadow-min.js"></script>    
+        <script type="text/javascript" src="/js/jquery.animate-shadow-min.js"></script>
 
         <script>
 
@@ -293,7 +274,7 @@
                 event.preventDefault();
                 if(event.handled !== true) {
 
-                    $("#stripes").stop().animate({scale:'1.2',opacity:'0.5'},300);	
+                    $("#stripes").stop().animate({scale:'1.2',opacity:'0.5'},300);
 
                     event.handled = true;
                 } else {
@@ -307,7 +288,7 @@
                 event.preventDefault();
                 if(event.handled !== true) {
 
-                    $("#stripes").stop().animate({scale:'1',opacity:'1'},300);	
+                    $("#stripes").stop().animate({scale:'1',opacity:'1'},300);
 
                     event.handled = true;
                 } else {
@@ -320,8 +301,8 @@
             var MENUSIDEOPEN = document.getElementById('stripes');
 
             MENUSIDEOPEN.addEventListener('click', function() {
-                $("#main-container-menu").stop().animate({left:'0'},300);	
-            }); 
+                $("#main-container-menu").stop().animate({left:'0'},300);
+            });
 
             /* BOUTON CROSS */
 
@@ -331,7 +312,7 @@
                 event.preventDefault();
                 if(event.handled !== true) {
 
-                    $("#cross-menu").stop().animate({scale:'1.2',opacity:'0.5'},300);	
+                    $("#cross-menu").stop().animate({scale:'1.2',opacity:'0.5'},300);
 
                     event.handled = true;
                 } else {
@@ -345,7 +326,7 @@
                 event.preventDefault();
                 if(event.handled !== true) {
 
-                    $("#cross-menu").stop().animate({scale:'1',opacity:'1'},300);	
+                    $("#cross-menu").stop().animate({scale:'1',opacity:'1'},300);
 
                     event.handled = true;
                 } else {
@@ -363,7 +344,7 @@
                 event.preventDefault();
                 if(event.handled !== true) {
 
-                    $("#stripes").stop().animate({scale:'1.2',opacity:'0.5'},300);	
+                    $("#stripes").stop().animate({scale:'1.2',opacity:'0.5'},300);
 
                     event.handled = true;
                 } else {
@@ -377,7 +358,7 @@
                 event.preventDefault();
                 if(event.handled !== true) {
 
-                    $("#stripes").stop().animate({scale:'1',opacity:'1'},300);	
+                    $("#stripes").stop().animate({scale:'1',opacity:'1'},300);
 
                     event.handled = true;
                 } else {
@@ -393,7 +374,7 @@
                 event.preventDefault();
                 if(event.handled !== true) {
 
-                    $("#oldnew-next").stop().animate({scale:'1.2',opacity:'0.5'},300);	
+                    $("#oldnew-next").stop().animate({scale:'1.2',opacity:'0.5'},300);
 
                     event.handled = true;
                 } else {
@@ -407,7 +388,7 @@
                 event.preventDefault();
                 if(event.handled !== true) {
 
-                    $("#oldnew-next").stop().animate({scale:'1',opacity:'1'},300);	
+                    $("#oldnew-next").stop().animate({scale:'1',opacity:'1'},300);
 
                     event.handled = true;
                 } else {
@@ -423,7 +404,7 @@
                 event.preventDefault();
                 if(event.handled !== true) {
 
-                    $("#oldnew-prev").stop().animate({scale:'1.2',opacity:'0.5'},300);	
+                    $("#oldnew-prev").stop().animate({scale:'1.2',opacity:'0.5'},300);
 
                     event.handled = true;
                 } else {
@@ -437,7 +418,7 @@
                 event.preventDefault();
                 if(event.handled !== true) {
 
-                    $("#oldnew-prev").stop().animate({scale:'1',opacity:'1'},300);	
+                    $("#oldnew-prev").stop().animate({scale:'1',opacity:'1'},300);
 
                     event.handled = true;
                 } else {
@@ -454,7 +435,7 @@
                 event.preventDefault();
                 if(event.handled !== true) {
 
-                    $("#logo").stop().animate({scale:'1.1',opacity:'0.5'},300);	
+                    $("#logo").stop().animate({scale:'1.1',opacity:'0.5'},300);
 
                     event.handled = true;
                 } else {
@@ -468,7 +449,7 @@
                 event.preventDefault();
                 if(event.handled !== true) {
 
-                    $("#logo").stop().animate({scale:'1',opacity:'1'},300);	
+                    $("#logo").stop().animate({scale:'1',opacity:'1'},300);
 
                     event.handled = true;
                 } else {

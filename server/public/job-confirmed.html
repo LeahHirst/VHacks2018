@@ -9,21 +9,21 @@
         <!-- Behavioral Meta Data -->
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-        <link rel="icon" type="image/png" href="img/small-logo-01.png">
+        <link rel="icon" type="image/png" href="/img/small-logo-01.png">
         <link href='http://fonts.googleapis.com/css?family=Roboto:400,900,900italic,700italic,700,500italic,400italic,500,300italic,300' rel='stylesheet' type='text/css'>
         <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
-        <link href='add-job.css' rel='stylesheet' type='text/css'>
+        <link href='/add-job.css' rel='stylesheet' type='text/css'>
 
 
         <!--    links for form styling-->
-        <link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
-        <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
-        <link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
-        <link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
-        <link rel="stylesheet" type="text/css" href="css-form/util.css">
-        <link rel="stylesheet" type="text/css" href="css-form/main.css">
+        <link rel="icon" type="image/png" href="/images/icons/favicon.ico"/>
+        <link rel="stylesheet" type="text/css" href="/vendor/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="/vendor/animate/animate.css">
+        <link rel="stylesheet" type="text/css" href="/vendor/css-hamburgers/hamburgers.min.css">
+        <link rel="stylesheet" type="text/css" href="/vendor/select2/select2.min.css">
+        <link rel="stylesheet" type="text/css" href="/css-form/util.css">
+        <link rel="stylesheet" type="text/css" href="/css-form/main.css">
 
         <!--     google api key -->
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyANNoWpcaXbtXtxCOs5g0RSQfZpRqygsfw&libraries=places"></script>
@@ -40,25 +40,7 @@
 
         <!-- HEADER -->
 
-        <div id="wrapper-header">
-            <div id="main-header" class="object">
-                <div class="logo">
-                    Co.unity - <span id="title-description">helping your community help you</span>
-                    <!--            <img src="img/new/logo.svg" alt="logo platz" style="height: 20%;">-->
-
-                </div>
-
-                <a href="profile.html"><img id="profpic" src="img/new/profile-images/5.jpg"></a>
-                <div id="main_tip_search"> 
-                    <form>
-                        <input type="text" name="search" id="tip_search_input" list="search" autocomplete=off required>
-                    </form>
-                </div>
-
-                <div id="stripes"></div>
-                <a href="add-job.html"><button id="new-job" class="button">Add a job</button></a>
-            </div>
-        </div>
+        <%- include('navbar', { user: user }); %>
 
         <!-- PORTFOLIO -->
 
@@ -67,22 +49,22 @@
 
 
             <div id="main-container-image">
-                
+
                 <div class="row-box">
                     <img src="https://cdn.dribbble.com/users/35381/screenshots/3581033/partyturt.png">
                     <h3>Woohoo!</h3>
                     <p>&nbsp;</p>
                     <p>
-                        Your job is now posted up on our website, congrats! We've sent you an email with a direct link to edit your job, if you choose to remove it or make any changes. 
+                        Your job is now posted up on our website, congrats! We've sent you an email with a direct link to edit your job, if you choose to remove it or make any changes.
                     </p>
                     <p>&nbsp;</p>
                     <p>
-                        We'll send you an email as soon as someone in your community claims your job. Until then, hang tight! 
+                        We'll send you an email as soon as someone in your community claims your job. Until then, hang tight!
                     </p>
                 </div>
-                
-                
-                
+
+
+
 
             </div>
 
@@ -121,13 +103,13 @@
         <!-- SCRIPT -->
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-        <script type="text/javascript" src="js/jquery.scrollTo.min.js"></script>
-        <script type="text/javascript" src="js/jquery.localScroll.min.js"></script>
-        <script type="text/javascript" src="js/jquery-animate-css-rotate-scale.js"></script>
-        <script type="text/javascript" src="js/fastclick.min.js"></script>
-        <script type="text/javascript" src="js/jquery.flip.min.js"></script>
-        <script type="text/javascript" src="js/jquery.animate-colors-min.js"></script>
-        <script type="text/javascript" src="js/jquery.animate-shadow-min.js"></script>    
+        <script type="text/javascript" src="/js/jquery.scrollTo.min.js"></script>
+        <script type="text/javascript" src="/js/jquery.localScroll.min.js"></script>
+        <script type="text/javascript" src="/js/jquery-animate-css-rotate-scale.js"></script>
+        <script type="text/javascript" src="/js/fastclick.min.js"></script>
+        <script type="text/javascript" src="/js/jquery.flip.min.js"></script>
+        <script type="text/javascript" src="/js/jquery.animate-colors-min.js"></script>
+        <script type="text/javascript" src="/js/jquery.animate-shadow-min.js"></script>
 
         <script>
 
@@ -189,7 +171,7 @@
                 event.preventDefault();
                 if(event.handled !== true) {
 
-                    $("#stripes").stop().animate({scale:'1.2',opacity:'0.5'},300);	
+                    $("#stripes").stop().animate({scale:'1.2',opacity:'0.5'},300);
 
                     event.handled = true;
                 } else {
@@ -203,7 +185,7 @@
                 event.preventDefault();
                 if(event.handled !== true) {
 
-                    $("#stripes").stop().animate({scale:'1',opacity:'1'},300);	
+                    $("#stripes").stop().animate({scale:'1',opacity:'1'},300);
 
                     event.handled = true;
                 } else {
@@ -216,8 +198,8 @@
             var MENUSIDEOPEN = document.getElementById('stripes');
 
             MENUSIDEOPEN.addEventListener('click', function() {
-                $("#main-container-menu").stop().animate({left:'0'},300);	
-            }); 
+                $("#main-container-menu").stop().animate({left:'0'},300);
+            });
 
             /* BOUTON CROSS */
 
@@ -227,7 +209,7 @@
                 event.preventDefault();
                 if(event.handled !== true) {
 
-                    $("#cross-menu").stop().animate({scale:'1.2',opacity:'0.5'},300);	
+                    $("#cross-menu").stop().animate({scale:'1.2',opacity:'0.5'},300);
 
                     event.handled = true;
                 } else {
@@ -241,7 +223,7 @@
                 event.preventDefault();
                 if(event.handled !== true) {
 
-                    $("#cross-menu").stop().animate({scale:'1',opacity:'1'},300);	
+                    $("#cross-menu").stop().animate({scale:'1',opacity:'1'},300);
 
                     event.handled = true;
                 } else {
@@ -259,7 +241,7 @@
                 event.preventDefault();
                 if(event.handled !== true) {
 
-                    $("#stripes").stop().animate({scale:'1.2',opacity:'0.5'},300);	
+                    $("#stripes").stop().animate({scale:'1.2',opacity:'0.5'},300);
 
                     event.handled = true;
                 } else {
@@ -273,7 +255,7 @@
                 event.preventDefault();
                 if(event.handled !== true) {
 
-                    $("#stripes").stop().animate({scale:'1',opacity:'1'},300);	
+                    $("#stripes").stop().animate({scale:'1',opacity:'1'},300);
 
                     event.handled = true;
                 } else {
@@ -289,7 +271,7 @@
                 event.preventDefault();
                 if(event.handled !== true) {
 
-                    $("#oldnew-next").stop().animate({scale:'1.2',opacity:'0.5'},300);	
+                    $("#oldnew-next").stop().animate({scale:'1.2',opacity:'0.5'},300);
 
                     event.handled = true;
                 } else {
@@ -303,7 +285,7 @@
                 event.preventDefault();
                 if(event.handled !== true) {
 
-                    $("#oldnew-next").stop().animate({scale:'1',opacity:'1'},300);	
+                    $("#oldnew-next").stop().animate({scale:'1',opacity:'1'},300);
 
                     event.handled = true;
                 } else {
@@ -319,7 +301,7 @@
                 event.preventDefault();
                 if(event.handled !== true) {
 
-                    $("#oldnew-prev").stop().animate({scale:'1.2',opacity:'0.5'},300);	
+                    $("#oldnew-prev").stop().animate({scale:'1.2',opacity:'0.5'},300);
 
                     event.handled = true;
                 } else {
@@ -333,7 +315,7 @@
                 event.preventDefault();
                 if(event.handled !== true) {
 
-                    $("#oldnew-prev").stop().animate({scale:'1',opacity:'1'},300);	
+                    $("#oldnew-prev").stop().animate({scale:'1',opacity:'1'},300);
 
                     event.handled = true;
                 } else {
@@ -342,7 +324,7 @@
             });
 
 
-           
+
 
             /*FORMULAIRE NEWSLETTER*/
 
@@ -356,11 +338,11 @@
 
         <!-- for form -->
 
-        <!--    <script src="vendor/jquery/jquery-3.2.1.min.js"></script>-->
-        <script src="vendor/bootstrap/js/popper.js"></script>
-        <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-        <script src="vendor/select2/select2.min.js"></script>
-        <script src="js-form/main.js"></script>
+        <!--    <script src="/vendor/jquery/jquery-3.2.1.min.js"></script>-->
+        <script src="/vendor/bootstrap/js/popper.js"></script>
+        <script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+        <script src="/vendor/select2/select2.min.js"></script>
+        <script src="/js-form/main.js"></script>
 
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>

@@ -1,0 +1,257 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Job Poster Account View</title>
+
+<!-- Behavioral Meta Data -->
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<link rel="icon" type="image/png" href="/img/small-logo-01.png">
+	<link href='http://fonts.googleapis.com/css?family=Roboto:400,900,900italic,700italic,700,500italic,400italic,500,300italic,300' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+	<link href='/style.css' rel='stylesheet' type='text/css'>
+	<script src="/js/sort.js"></script>
+	<link href='/account.css' rel='stylesheet' type='text/css'>
+	<link href='/job-detail.css' rel='stylesheet' type='text/css'>
+
+	<script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+</head>
+
+<body>
+
+<a name="ancre"></a>
+
+<!-- CACHE -->
+<div class="cache"></div>
+
+<!-- HEADER -->
+
+<%- include('navbar', { user: user }); %>
+
+
+	<div id="wrapper-container" class="user-container-white">
+		<div id="container-box" class="container object">
+			<div class="font-style">
+
+				<div id="user-heading">
+					<div class="part-info-image larger-profile-image">
+						<img src="<%= user.photo %>" alt=""/>
+					</div>
+					<div class="account-details">
+						<div>
+							<h1 class="username-style"><%= user.name %></h1>
+							<p class="min-margins account-status"><%= user.type %></p>
+						</div>
+						<div class="right-account-details">
+							<p class="min-margins"><%= user.email %></p>
+							<p class="min-margins"><%= user.phoneNumber %></p>
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<div id="wrapper-container" class="bottom-padding">
+
+			<div id="container-box" class="container object">
+				<div class="font-style">
+					<h2>Pending Jobs</h2>
+				</div>
+				<div>
+					<div id="job-detail-container-box">
+						<div id="job-heading-column-container">
+							<div class="work">
+								<% for (var i = 0; i < jobs.length; i++) { %>
+									<figure class="white">
+                                        <% if (jobs[i].confirmed) { %>
+											<div class="job-completion-container font-style-white">
+												<p class="min-margins">
+													<i class="fas fa-check-circle details-icon">
+													</i>
+													<span class="bold-text">Job Completed:</span>
+													Please Review
+												</p>
+											</div>
+                                        <% } else { %>
+											<div class="job-pending-container font-style-white">
+												<p class="min-margins">
+													<i class="fas fa-clock details-icon">
+													</i>
+													<span class="bold-text">Job Pending: </span>Please wait for next step.
+												</p>
+											</div>
+                                        <% } %>
+										<a href="#">
+											<img src="<%= jobs[i].image %>" alt="" />
+										</a>
+										<div id="wrapper-part-info shorter-wrapper">
+											<div class="part-info-image">
+												<img src="<%= jobs[i].author.photo %>" alt="" width="28" height="28"/>
+											</div>
+											<div id="part-info">
+												<%= jobs[i].author.name %>
+												<div class="right-data">
+													<h3>$<%= jobs[i].payment %></h3>
+
+												</div>
+
+											</div>
+
+
+										</div>
+										<div id="job-details">
+											<div class="detail-text">
+												<i class="fas fa-users details-icon">
+												</i>
+												3/4 Fulfilled (TEST DATA)
+											</div>
+											<div  class="detail-text">
+												<i class="fas fa-stopwatch details-icon-time">
+												</i>
+												Completion by <%= jobs[i].deadline %>
+											</div>
+										</div>
+									</figure>
+								<% } %>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+
+
+	<div id="wrapper-container" class="bottom-padding">
+
+			<div id="container-box" class="container object">
+				<div class="font-style">
+					<h2>Completed Jobs</h2>
+				</div>
+				<div>
+					<div id="job-detail-container-box">
+						<div id="job-heading-column-container">
+							<div class="work">
+                                <% for (var i = 0; i < doneJobs.length; i++) { %>
+								<figure class="white faded">
+									<a href="#">
+										<img src="<%= doneJobs[i].image %>" alt="" />
+									</a>
+									<div id="wrapper-part-info shorter-wrapper">
+										<div class="part-info-image">
+											<img src="<%= doneJobs[i].author.photo %>" alt="" width="28" height="28"/>
+										</div>
+										<div id="part-info">
+                                            <%= doneJobs[i].author.name %>
+											<div class="right-data">
+												<h3>$<%= doneJobs[i].payment %></h3>
+
+											</div>
+
+										</div>
+
+
+									</div>
+									<div id="job-details">
+										<div class="detail-text">
+											<i class="fas fa-users details-icon">
+											</i>
+											3/4 Fulfilled (TEST DATA)
+										</div>
+										<div  class="detail-text">
+											<i class="fas fa-stopwatch details-icon-time">
+											</i>
+											Completion by <%= doneJobs[i].deadline %>
+										</div>
+									</div>
+								</figure>
+                                <% } %>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+
+	<div id="main-container-footer">
+		<div class="container-footer">
+
+			<div id="row-1f">
+				<div class="text-row-1f"><span style="font-weight:600;font-size:15px;color:#666;line-height:250%;text-transform:uppercase;letter-spacing:1.5px;">What we do</span><br>We aim to foster social inclusion within our local communities by providing temporary jobs to those who need them.</div>
+			</div>
+
+			<div id="row-2f">
+				<div class="text-row-2f"><span style="font-weight:600;font-size:15px;color:#666;line-height:250%;text-transform:uppercase;letter-spacing:1.5px;">See a job you like?</span><br>Claim it and complete it, and you'll get a gift card for your the great work you did!</div>
+			</div>
+
+			<div id="row-3f">
+				<div class="text-row-3f"><span style="font-weight:600;font-size:15px;color:#666;line-height:250%;text-transform:uppercase;letter-spacing:1.5px;">Need a job done?</span><br>Create a job and someone in your community will be at your aid!</div>
+			</div>
+
+			<div id="row-4f">
+				<div class="text-row-4f"><span style="font-weight:600;font-size:15px;color:#666;line-height:250%;text-transform:uppercase;letter-spacing:1.5px;">Newsletter</span><br>You will be informed monthly about the latest content avalaible.</div>
+
+				<div id="main_tip_newsletter">
+					<form>
+						<input type="text" name="newsletter" id="tip_newsletter_input" list="newsletter" autocomplete=off required>
+					</form>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+
+	<div id="wrapper-copyright">
+		<div class="copyright">
+			<div class="copy-text object">Copyright © 2018. </div>
+
+			<div class="wrapper-navbouton">
+<!--
+				<div class="google object">g</div>
+				<div class="facebook object">f</div>
+				<div class="linkin object">i</div>
+				<div class="dribbble object">d</div>
+-->
+			</div>
+		</div>
+	</div>
+
+</div>
+
+
+
+<!-- SCRIPT -->
+
+	<script
+			src="https://code.jquery.com/jquery-3.3.1.js"
+			integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+			crossorigin="anonymous"></script>
+<!--	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>-->
+	<script type="text/javascript" src="/js/jquery.scrollTo.min.js"></script>
+	<script type="text/javascript" src="/js/jquery.localScroll.min.js"></script>
+	<script type="text/javascript" src="/js/jquery-animate-css-rotate-scale.js"></script>
+	<script type="text/javascript" src="/js/fastclick.min.js"></script>
+	<script type="text/javascript" src="/js/jquery.animate-colors-min.js"></script>
+	<script type="text/javascript" src="/js/jquery.animate-shadow-min.js"></script>
+	<script type="text/javascript" src="/js/main.js"></script>
+	<script>
+
+
+
+</body>
+
+
+</html>

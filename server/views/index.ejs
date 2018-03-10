@@ -28,27 +28,7 @@
 
 <!-- HEADER -->
 
-<div id="wrapper-header">
-	<div id="main-header" class="object">
-		<div class="logo">
-            Co.unity - <span id="title-description">helping your community help you</span>
-<!--            <img src="/img/new/logo.svg" alt="logo platz" style="height: 20%;">-->
-
-        </div>
-
-
-        <div id="main_tip_search">
-
-			<form>
-				<input type="text" name="search" id="tip_search_input" list="search" autocomplete=off required>
-			</form>
-		</div>
-        <div id="stripes"></div>
-        <a href="/job/create"><button id="new-job" class="button">Add a job</button></a>
-        <a href="reward"><button style="width:140px; margin-right:10px" class="button" >Job reward</button></a>
-    </div>
-
-</div>
+<%- include('navbar', { user: user }); %>
 
 <!-- NAVBAR -->
 
@@ -283,27 +263,31 @@ var longitude = 0;
 
 function template(job) {
   if (job.image == undefined) job.image = 'img/psd-4.jpg';
-  var tSince = timeSince(new Date(job.created));
+  if (job.author) {
+
+  }
+  var tSince = timeSince(new Date(job.created)) + ' ago';
   if (job.distance != undefined) tSince += ", " + job.distance + 'km away';
   return `<figure class="white">
       <a href="/job/${job._id}">
           <img class="job-image" src="${job.image}" alt="" />
           <dl>
               <dt>${job.title}</dt>
+              <dd style="margin-top: -6px; margin-bottom: 3px;"><i>${tSince}</i></dd>
               <dd>${job.description}</dd>
           </dl>
       </a>
       <div id="wrapper-part-info">
-          <div class="part-info-image"><img src="/img/new/profile-images/2.jpg" alt=""/></div>
+          <div class="part-info-image"><img src="${job.author[0].photo}" alt=""/></div>
           <div id="part-info">${job.title}
-              <div class="right-data"> <h3>&euro;${job.payment}</h3> <h4>${tSince}</h4></div>
+              <div class="right-data"> <h3>&euro;${job.payment}</h3></div>
           </div>
       </div>
   </figure>`;
 }
 
 function getJobs(radius) {
-  $.post("/job/list", { latitude: 0, longitude: 0, radius: radius }, function(data, status) {
+  $.post("/job/list", { latitude: latitude, longitude: longitude, radius: radius }, function(data, status) {
     jobs = data;
     sortJobs();
   });
@@ -319,6 +303,7 @@ function sortJobs(sortType) {
 
   for (var i = 0; i < jobs.length; i++) {
     // Append to the container
+    jobs[i].distance = Math.floor(jobs[i].distance);
     container.append(template(jobs[i]));
   }
 
@@ -356,6 +341,13 @@ $('input[type=range]').on('input', function () {
 
 var input = document.getElementById('location-text');
 autocomplete = new google.maps.places.Autocomplete(input);
+google.maps.event.addListener(autocomplete, 'place_changed', function () {
+    var place = autocomplete.getPlace();
+    latitude = place.geometry.location.lat();
+    longitude = place.geometry.location.lng();
+
+    getJobs($('#radius').val());
+});
 
 </script>
 

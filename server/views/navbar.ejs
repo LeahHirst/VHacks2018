@@ -1,0 +1,25 @@
+<div id="wrapper-header">
+	<div id="main-header" class="object">
+		<div class="logo">
+            Co.unity - <span id="title-description">helping your community help you</span>
+<!--            <img src="/img/new/logo.svg" alt="logo platz" style="height: 20%;">-->
+
+        </div>
+
+        <a href="/account"><img id="profpic" src="<%= user.photo %>"></a>
+        <div id="main_tip_search">
+
+			<form>
+				<input type="text" name="search" id="tip_search_input" list="search" autocomplete=off required>
+			</form>
+		</div>
+        <div id="stripes"></div>
+        <a href="/logout"><button class="button">Logout</button></a>
+        <% if (user.type == "Seeker") { %>
+        <a href="/reward"><button style="margin-right:10px" class="button" >Job reward</button></a>
+        <% } else { %>
+        <a href="/job/create"><button id="new-job" style="margin-right:10px" class="button">Add a job</button></a>
+        <% } %>
+    </div>
+
+</div>

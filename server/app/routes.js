@@ -6,7 +6,11 @@ module.exports = (app, passport, db) => {
   var jobs = require('./jobs.js')(db);
 
   app.get('/', (req, res) => {
-    res.render('index', {});
+    if (req.user == undefined) {
+      res.redirect('/login')
+    } else {
+      res.render('index', { user: req.user });
+    }
   });
 
   app.get('/login', (req, res) => {
@@ -23,12 +27,23 @@ module.exports = (app, passport, db) => {
   });
 
   app.get('/job/create', (req, res) => {
-    res.render('add_job', { error: req.flash("error") });
+    if (req.user == undefined) res.redirect('/login');
+    else res.render('add_job', { user: req.user, error: req.flash("error") });
   });
 
   app.get('/job/create/confirmation', (req, res) => {
-      res.render('jobcreationconfirmation', {});
-  })
+      res.render('jobcreationconfirmation', { user: req.user });
+  });
+
+  app.post('/job/complete', (req, res) => {
+    db.model.Job.update({ _id: req.body.jobId }, { $set: { confirmed: true } });
+    res.redirect('/job/' + req.body.jobId)
+  });
+
+  app.post('/job/approve', (req, res) => {
+    db.model.Job.update({ _id: req.body.jobId }, { $set: { paid: true } });
+    res.redirect('/job/' + req.body.jobId);
+  });
 
   app.post('/job/list', (req, res) => {
       var data = req.body;
@@ -51,7 +66,11 @@ module.exports = (app, passport, db) => {
   	if (!req.user){
   		res.redirect('/login');
   	} else {
-  		res.render('account', { user: req.user });
+  	    db.model.Job.find({ author: req.user._id, paid: false}, function (err, jobs) {
+            db.model.Job.find({ author: req.user._id, paid: true}, function (err, doneJobs) {
+                res.render('account_requester', { user: req.user, jobs: jobs, doneJobs: doneJobs });
+            });
+        });
   	}
   	// if (req.user.type == 'Requester'){
 
@@ -79,7 +98,7 @@ module.exports = (app, passport, db) => {
 
 	  // create charge
 	  const charge = {
-	    amount: charge_amt * 100.0, // convert to cents!
+	    amount: charge_amt * 100.0, // convert to cents! (Floating point cents though, for extra imprecision!)
 	    currency: 'eur',
 	    card: stripeToken
 	  };
@@ -111,12 +130,45 @@ module.exports = (app, passport, db) => {
   });
 
   app.get('/job/:id', (req, res) => {
-      db.model.Job.findOne({ _id: req.params.id }, '_id title description deadline location numberRequired contactInfo payment author', function (err, job) {
+    if (req.user == undefined) {
+      res.redirect('/login');
+      return;
+    }
+
+      db.model.Job.findOne({ _id: req.params.id }).populate('author').populate('claimedBy').lean().exec(function (err, job) {
           if (err) {
               console.log(err);
-              return
           } else {
-              res.render('viewjob', { job: job })
+            function timeSince(date) {
+
+              var seconds = Math.floor((new Date() - date) / 1000);
+
+              var interval = Math.floor(seconds / 31536000);
+
+              if (interval > 1) {
+                return interval + " years";
+              }
+              interval = Math.floor(seconds / 2592000);
+              if (interval > 1) {
+                return interval + " months";
+              }
+              interval = Math.floor(seconds / 86400);
+              if (interval > 1) {
+                return interval + " days";
+              }
+              interval = Math.floor(seconds / 3600);
+              if (interval > 1) {
+                return interval + " hours";
+              }
+              interval = Math.floor(seconds / 60);
+              if (interval > 1) {
+                return interval + " minutes";
+              }
+              return Math.floor(seconds) + " seconds";
+            }
+
+            var cSince = timeSince(new Date(job.created));
+            res.render('viewjob', { user: req.user, job: job, cSince: cSince });
           }
       });
   });

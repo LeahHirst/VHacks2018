@@ -20,8 +20,9 @@ module.exports = (db) => {
       * Finds all jobs in a square around a given latlon and filters distances
       * that are too far.
       */
-
-      var rDist = searchRadius / 111; // Search radius (in km)
+      latitude = parseFloat(latitude);
+      longitude = parseFloat(longitude);
+      var rDist = parseFloat(searchRadius / 111); // Search radius (in km)
 
       db.model.Job.find({
         'location.latitude': { $gte: latitude-rDist, $lt: latitude+rDist },
@@ -33,6 +34,7 @@ module.exports = (db) => {
             if (err) return cb(err);
 
             jobs = JSON.parse(JSON.stringify(jobs));
+            console.log(jobs);
 
             var x = jobs.length;
             for (var i = 0; i < x; i++) {
@@ -41,7 +43,7 @@ module.exports = (db) => {
               var dist = calculateDistance(latitude, longitude, l.latitude, l.longitude);
               // Filter out
               if (dist > searchRadius) {
-                array.splice(i, 1);
+                jobs.splice(i, 1);
                 i--; x--;
               } else {
                 jobs[i].distance = dist;
