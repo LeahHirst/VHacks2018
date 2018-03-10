@@ -50,9 +50,37 @@
 
 				</div>
 			</a>
-			<div id="map-box">
-				<div id="map"></div>
-			</div>
+      <% if (flash != '') { %>
+      <div id="job-heading-column-container">
+					<div class="work">
+						<figure class="white" style="
+    width: calc(100% - 30px);
+    text-align: center;
+    background-color: #6cbf65;
+    color: #fff;
+">
+
+		                            				<div style="
+    text-align: center;
+">
+
+			                            				<div id="part-info" style="
+    color: #fff;
+    text-align: center;
+">
+			                            					<%= flash %>
+									</div>
+
+
+							</div>
+
+						</figure>
+					</div>
+				</div>
+        <% } %>
+  			<div id="map-box">
+  				<div id="map"></div>
+  			</div>
 			<div id="job-detail-container-box">
 				<div id="job-heading-column-container">
 					<div class="work">
@@ -147,23 +175,23 @@
                 <% } else { %>
                   <form method="post" action="/job/claim">
                     <input id="jobId" name="jobId" type="hidden" value="<%= job._id %>">
-                    <button class="btn font-style" type="button"><span>CLAIM JOB</span></button>
+                    <button class="btn font-style" type="submit"><span>CLAIM JOB</span></button>
                   </form>
                 <% } %>
               <% } else if (job.confirmed) { %>
-                <% if (user.type == "Seeker") { %>
-                  <form method="post" action="/job/complete">
-                    <input id="jobId" name="jobId" type="hidden" value="<%= job._id %>">
-                    <button class="btn font-style" type="button"><span>MARK AS COMPLETED</span></button>
-                  </form>
-                <% } %>
-              <% } else { %>
                 <% if (user.type != "Seeker") { %>
                   <form method="post" action="/job/approve">
                       <input id="jobId" name="jobId" type="hidden" value="<%= job._id %>">
-                      <button class="btn font-style" type="button"><span>APPROVE WORK</span></button>
+                      <button class="btn font-style" type="submit"><span>APPROVE WORK</span></button>
                   </form>
                   <button class="btn font-style" type="button"><span>REQUEST RESUBMISSION</span></button>
+                <% } %>
+              <% } else { %>
+                <% if (user.type == "Seeker") { %>
+                  <form method="post" action="/job/complete">
+                    <input id="jobId" name="jobId" type="hidden" value="<%= job._id %>">
+                    <button class="btn font-style" type="submit"><span>MARK AS COMPLETED</span></button>
+                  </form>
                 <% } %>
               <% } %>
 

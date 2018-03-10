@@ -37,11 +37,13 @@ module.exports = (app, passport, db) => {
 
   app.post('/job/complete', (req, res) => {
     db.model.Job.update({ _id: req.body.jobId }, { $set: { confirmed: true } });
-    res.redirect('/job/' + req.body.jobId)
+    req.flash('success', 'Nice work! Marked job as complete. You will recieve your credit on approval.');
+    res.redirect('/job/' + req.body.jobId);
   });
 
   app.post('/job/approve', (req, res) => {
     db.model.Job.update({ _id: req.body.jobId }, { $set: { paid: true } });
+    req.flash('success', 'Job approved! Thanks for being awesome and helping those in your community!');
     res.redirect('/job/' + req.body.jobId);
   });
 
@@ -168,7 +170,7 @@ module.exports = (app, passport, db) => {
             }
 
             var cSince = timeSince(new Date(job.created));
-            res.render('viewjob', { user: req.user, job: job, cSince: cSince });
+            res.render('viewjob', { user: req.user, job: job, cSince: cSince, flash: req.flash('success') });
           }
       });
   });
@@ -241,13 +243,15 @@ module.exports = (app, passport, db) => {
       } else if (req.user.type == "Requester") {
         res.redirect('/login');
       } else {
-        var id = req.body.id;
+        var id = req.body.jobId;
         console.log("Accepting job id " + id + " by user " + req.user);
         db.model.Job.update({ _id: id }, { $push: { claimedBy: req.user._id } }, function (err, affected) {
            if (err) {
-               console.log("Error accepting job: " + err);
+             req.flash('error', err);
+               res.redirect('/job/' + id);
            } else {
-               res.redirect('/account');
+             req.flash('success', 'Job claimed!');
+             res.redirect('/job/' + id);
            }
         });
     }
