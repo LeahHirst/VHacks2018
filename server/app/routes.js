@@ -56,7 +56,11 @@ module.exports = (app, passport, db) => {
   	if (!req.user){
   		res.redirect('/login');
   	} else {
-  		res.render('account', { user: req.user });
+  	    db.model.Job.find({ author: req.user._id, paid: false}, function (err, jobs) {
+            db.model.Job.find({ author: req.user._id, paid: true}, function (err, doneJobs) {
+                res.render('account_requester', { user: req.user, jobs: jobs, doneJobs: doneJobs });
+            });
+        });
   	}
   	// if (req.user.type == 'Requester'){
 
@@ -84,7 +88,7 @@ module.exports = (app, passport, db) => {
 
 	  // create charge
 	  const charge = {
-	    amount: charge_amt * 100.0, // convert to cents!
+	    amount: charge_amt * 100.0, // convert to cents! (Floating point cents though, for extra imprecision!)
 	    currency: 'eur',
 	    card: stripeToken
 	  };
