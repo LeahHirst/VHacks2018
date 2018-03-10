@@ -984,3 +984,23 @@ body,html{
 @media only screen and (max-width: 320px) {
 
 }
+
+#user-account{
+    display: flex;
+    position: absolute;
+    right: 0;
+    margin-top: 15px;
+    color: white;
+    font-size: 2em;
+}
+
+#account-a-tag{
+    color: white;
+    text-decoration: inherit;
+}
+
+
+
+.bottom-padding{
+    padding-bottom: 100px;
+}

@@ -1,11 +1,13 @@
 {
   "name": "vhacks-si3",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "engines": {
+    "node": "9.2.0"
   },
   "author": "",
   "license": "ISC",
@@ -23,5 +25,15 @@
     "passport-local": "^1.0.0",
     "semantic-ui": "^2.3.0",
     "stripe": "^5.5.0"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AdamHirst/VHacks2018.git"
+  },
+  "bugs": {
+    "url": "https://github.com/AdamHirst/VHacks2018/issues"
+  },
+  "homepage": "https://github.com/AdamHirst/VHacks2018#readme",
+  "description": ""
 }

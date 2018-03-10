@@ -63,7 +63,12 @@
 	margin-left: 15px;
 	line-height: 20px;
 	font-family: Helvetica, sans-serif; 
-	font-weight: 300; 
+		font-weight: 300; 
+}
+
+.detail-text {
+    margin-bottom: 7px; 
+    margin-top: 7px; 
 }
 
 .details-icon{
@@ -81,17 +86,9 @@
 .font-style{
 	font-family: Helvetica, sans-serif; 
 	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-	font-weight: 500; 
-	color:#666;
-}
-
-.font-style-white{
-	font-family: Helvetica, sans-serif; 
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-	font-weight: 500; 
-	color:white;
+		-moz-osx-font-smoothing: grayscale;
+		font-weight: 500; 
+		color:#666;
 }
 
 #job-name-row{
@@ -254,6 +251,17 @@
 	height: 300px;
 }
 
-.sm-footer-margin{
-	height: 100px;
+#main_tip_search{
+    float:right;
+    width:170px;
+    margin-top:13px;
+    height:auto;
+    margin-right:26px;
+    display:block;
+}
+
+#resubmit-form {
+    display: flex; 
+    flex-direction: column; 
+    height: 30px; 
 }

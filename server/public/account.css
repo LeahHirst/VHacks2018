@@ -1,0 +1,92 @@
+#user-heading{
+	display: flex;
+	flex-direction: row;
+}
+
+.username-style{
+	font-weight: 700;
+	margin-bottom: 5px;
+	margin-bottom: 5px;
+}
+
+.account-details{
+	margin-left: 30px;
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+	-ms-flex-align: center;
+	-webkit-align-items: center;
+	-webkit-box-align: center;
+
+	align-items: center;
+}
+
+p.min-margins{
+	margin: 0px;
+}
+
+.font-color-white{
+	color: white;
+}
+
+.job-due-reminder-container{
+	padding: 10px;
+	background-color: #FFCA28;
+	font-size: 14px;
+}
+
+.job-completion-container{
+	background-color: #8BC34A;
+	padding: 10px;
+}
+
+.job-completion-action-container{
+	background-color: #8BC34A;
+	padding: 20px;
+	text-align: center;
+}
+
+.job-pending-container{
+	background-color: #FF9800;
+	padding: 10px;
+}
+
+.right-account-details{
+	float: right;
+	-ms-flex-align: center;
+	-webkit-align-items: center;
+	-webkit-box-align: center;
+	align-items: center;
+}
+
+.right-align{
+	text-align: right;
+}
+
+.bold-text{
+	font-weight: 700;
+}
+
+#jobs-container{
+	display: flex;
+	flex-direction: column;
+}
+
+.faded{
+	opacity: 0.5;
+}
+
+.user-container-white{
+	background-color: white;
+	padding-bottom: 30px;
+}
+
+.larger-profile-image img{
+	margin-top: 8px;
+	width: 60px;
+	height: 60px;
+}
+
+.account-status{
+	font-style: italic;
+}
