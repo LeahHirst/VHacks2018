@@ -130,7 +130,7 @@
 						</div>
 					</div>
 					<div id="job-poster-row" class="light-gray">
-						Posted by <%= job.author[0].name %> <%= cSince %> ago
+						Posted <%= cSince %> ago
 						<i class="far fa-clock details-icon-time">
 			                            		</i>
 					</div>
@@ -144,7 +144,7 @@
 					<div id="job-contact-action-container">
 						<div id="job-contact-column" class="light-gray">
 							<img src="<%= job.author[0].photo %>" alt="" width="20" height="20"/>
-							Julian Smith
+							<%= job.author[0].name %>
 							<div class="contact-details">
 								<p id="phone-number"><%= job.author[0].phoneNumber %></p>
 								<p id="email-address"><%= job.author[0].email %></p>
