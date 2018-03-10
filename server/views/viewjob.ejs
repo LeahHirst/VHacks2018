@@ -149,7 +149,10 @@
                 <% } %>
               <% } else if (job.confirmed) { %>
                 <% if (user.type == "Seeker") { %>
-                  <button class="btn font-style" type="button"><span>MARK AS COMPLETED</span></button>
+                  <form method="post" action="/job/complete">
+                    <input id="jobId" name="jobId" type="hidden" value="<%= job._id %>">
+                    <button class="btn font-style" type="button"><span>MARK AS COMPLETED</span></button>
+                  </form>
                 <% } %>
               <% } else { %>
                 <% if (user.type != "Seeker") { %>

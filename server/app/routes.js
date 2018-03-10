@@ -33,7 +33,17 @@ module.exports = (app, passport, db) => {
 
   app.get('/job/create/confirmation', (req, res) => {
       res.render('jobcreationconfirmation', { user: req.user });
-  })
+  });
+
+  app.post('/job/complete', (req, res) => {
+    db.model.Job.update({ _id: req.body.jobId }, { $set: { confirmed: true } });
+    res.redirect('/job/' + req.body.jobId)
+  });
+
+  app.post('/job/approve', (req, res) => {
+    db.model.Job.update({ _id: req.body.jobId }, { $set: { paid: true } });
+    res.redirect('/job/' + req.body.jobId);
+  });
 
   app.post('/job/list', (req, res) => {
       var data = req.body;
