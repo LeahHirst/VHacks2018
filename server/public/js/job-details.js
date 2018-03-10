@@ -36,4 +36,5 @@ function cancelDonation(){
 	fundButton.innerHTML = "<span>FUND JOB</span>";
 	fundForm.classList.remove("active-donation");
 	fundForm.classList.add("inactive-donation");
+	return false;
 };

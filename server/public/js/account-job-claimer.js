@@ -18,5 +18,6 @@ function jobCompletionForm(){
 function cancelCompletedForm(){
 	var fundForm = document.getElementById("job-completion-form");
 	fundForm.classList.add("inactive-completion");
-	fundForm.classList.remove("active-completion")
+	fundForm.classList.remove("active-completion");
+	return false;
 };
