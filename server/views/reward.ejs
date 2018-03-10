@@ -27,24 +27,8 @@
 
 <!-- HEADER -->
 
-<div id="wrapper-header">
-  <div id="main-header" class="object">
-    <div class="logo">
-            Co.unity - <span id="title-description">helping your community help you</span>
-<!--            <img src="/img/new/logo.svg" alt="logo platz" style="height: 20%;">-->
-        </div>
+<%- include('navbar', { user: user }); %>
 
-
-        <div id="main_tip_search">
-      <form>
-        <input type="text" name="search" id="tip_search_input" list="search" autocomplete=off required>
-      </form>
-    </div>
-
-        <div id="stripes"></div>
-        <a href="reward"><button style="width:140px; margin-right:60px" class="button" >Job reward</button></a>
-    </div>
-</div>
 <br><br><br><br><br><br>
   <img class="ui centered medium circular image" src="/img/present.gif"> <br><br>
 <h1 class="ui center aligned header">
@@ -53,11 +37,11 @@
 </h1><br>
 
 <h2 class="ui large center aligned header">
-  Your balance is €20. Which one would you like? 
+  Your balance is €20. Which one would you like?
 </h2><br>
 
-<!-- Although these gift certificates are statically coded, we did look into APIs which provide gift card services like 
-https://www.lightrail.com however, because theses applications require us to contact their sales team 
+<!-- Although these gift certificates are statically coded, we did look into APIs which provide gift card services like
+https://www.lightrail.com however, because theses applications require us to contact their sales team
 to use their application, it wasn't feasible to integrate it for the hackathon. -->
 
 <div class="ui link centered cards">
@@ -66,7 +50,7 @@ to use their application, it wasn't feasible to integrate it for the hackathon. 
       <img src="/img/logo_carrefour.png" style="height:150px;" >
     </div>
     <div class="content">
-      <div class="header">Carrefour</div> 
+      <div class="header">Carrefour</div>
       <div class="meta">
         Supermarket - <i class="map icon"></i> 0.3 km Northeast
       </div>

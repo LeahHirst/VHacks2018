@@ -293,7 +293,7 @@ module.exports = (app, passport, db) => {
     } else if (req.user.type == "Requester") {
       res.redirect('/');
     } else{
-    	res.render('reward');
+    	res.render('reward', { user: req.user });
     }
   });
 
