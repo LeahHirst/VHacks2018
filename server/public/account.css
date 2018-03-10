@@ -3,10 +3,26 @@
 	flex-direction: row;
 }
 
+.button-no-style{
+	border:none;
+	width: 100%;
+	cursor: pointer;
+	padding: 0px;
+	font-size: 16px;
+}
+
 .username-style{
 	font-weight: 700;
 	margin-bottom: 5px;
 	margin-bottom: 5px;
+}
+
+.inactive-completion{
+	display: none;
+}
+
+.completion{
+	width: 100%;
 }
 
 .account-details{
@@ -17,7 +33,6 @@
 	-ms-flex-align: center;
 	-webkit-align-items: center;
 	-webkit-box-align: center;
-
 	align-items: center;
 }
 
@@ -44,6 +59,10 @@ p.min-margins{
 	background-color: #8BC34A;
 	padding: 20px;
 	text-align: center;
+}
+
+#job-completion-form{
+	margin: 10px;
 }
 
 .job-pending-container{
@@ -89,4 +108,9 @@ p.min-margins{
 
 .account-status{
 	font-style: italic;
+}
+
+.submission-text{
+	width: 100%;
+	height: 100px;
 }

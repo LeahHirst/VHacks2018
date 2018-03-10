@@ -16,7 +16,7 @@
 	<script src="js/sort.js"></script>
 	<link href='account.css' rel='stylesheet' type='text/css'>
 	<link href='job-detail.css' rel='stylesheet' type='text/css'>
-
+	<script type="text/javascript" src="js/account-job-claimer.js"></script>
 	<script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
 
 </head>
@@ -134,13 +134,25 @@
 											Completion by 04/05/2018
 										</div>
 					                            			</div>
-					                            			<div class="job-completion-action-container font-style-white">
-										<p class="min-margins">
-											<i class="fas fa-check-circle details-icon">
-					                            					</i>
-											<span class="bold-text">Mark as Completed</span>
-										</p>
-									</div>
+					                            			<div id="job-completion-form" class="inactive-completion completion-form">
+					                            				<form>
+					                            					<div id="cancel-action">
+							                            				<button onclick="cancelCompletedForm()">
+							                            					Cancel
+							                            				</button>
+							                            			</div>
+					                            					<input class="submission-text" type="text">
+					                            					</input>
+					                            				</form>
+					                            			</div>
+
+					                            			<button id="complete-form-submission" class="button-no-style job-completion-action-container font-style-white" onclick="jobCompletionForm()">
+											<p class="min-margins">
+												<i class="fas fa-check-circle details-icon">
+						                            					</i>
+												<span class="bold-text">Mark as Completed</span>
+											</p>
+									</button>
 								</figure>
 								<figure class="white">
 									<div class="job-due-reminder-container font-style-white">
